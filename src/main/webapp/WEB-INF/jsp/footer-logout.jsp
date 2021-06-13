@@ -89,7 +89,7 @@
                                     <ul class="ft__list">
                                         <li><a href="#">My Account</a></li>
                                         <li><a href="cart.html">My Cart</a></li>
-                                        <li><a href="login">Login</a></li>
+                                        <li><a href="#">Products</a></li>
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                     </ul>
@@ -105,7 +105,7 @@
                                     <ul class="ft__list">
                                         <li><a href="#">My Account</a></li>
                                         <li><a href="cart.html">My Cart</a></li>
-                                        <li><a href="login">Login</a></li>
+                                        <li><a href="#">Products</a></li>
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                     </ul>
@@ -140,7 +140,7 @@
                         <div class="col-xs-12">
                             <div class="copyright__inner">
                                 <p>Copyright© 2021. All right reserved.</p>
-                                <a href="#"><img src="images/others/shape/paypol.png" alt="payment images"></a>
+                                <a href="#"><img src="/images/others/shape/paypol.png" alt="payment images"></a>
                             </div>
                         </div>
                     </div>

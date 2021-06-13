@@ -264,6 +264,14 @@
     color: #888888;
 }
 
+li.old_price {
+	text-decoration: line-through;
+}
+
+li.sale_price {
+	font-weight: bold !important;;
+	color: red !important;;
+}
 /*---------------------------------------
   03. Good Sale Area
 ----------------------------------------*/
@@ -3526,7 +3534,16 @@ ul.htc__instagram__posts.owl-carousel li img {
 
 
 /*Buttons*/
-.dark-btn a{
+.dark-btn {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:20px;
+  margin-bottom:20px; 
+}
+
+.dark-btn button{
     display: inline-block;
     height: 45px;
     line-height: 45px;
@@ -3541,7 +3558,7 @@ ul.htc__instagram__posts.owl-carousel li img {
     font-size: 16px;
     transition: all 0.3s ease-in-out 0s;
 }
-.dark-btn a:hover{
+.dark-btn button:hover{
     background: #c43b68;
 }
 

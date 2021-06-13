@@ -37,9 +37,8 @@
 </head>
 
 <body>
-
+<div class="wrapper">
 	<!-- Body main wrapper start -->
-	
 		<!-- Start Header Style -->
 		<header id="htc__header" class="htc__header__area header--one">
 			<!-- Start Mainmenu Area -->
@@ -50,13 +49,13 @@
 						<div class="menumenu__container clearfix">
 							<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
 								<div class="logo">
-									<a href="/"><img src="/images/logo/4.png" alt="logo images"></a>
+									<a href="/user"><img src="/images/logo/4.png" alt="logo images"></a>
 								</div>
 							</div>
 							<div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
 								<nav class="main__menu__nav hidden-xs hidden-sm">
 									<ul class="main__menu">
-										<li class="drop"><a href="">Home</a></li>
+										<li class="drop"><a href="/user">Home</a></li>
 										<li class="drop"><a href="#">Product</a>
 											<ul class="dropdown">
 												<li><a href="product-grid.html">Table</a></li>
@@ -73,31 +72,28 @@
 											<ul class="dropdown">
 												<li><a href="blog.html">Blog</a></li>
 												<li><a href="blog-details.html">Blog Details</a></li>
-												<li><a href="cart.html">Cart page</a></li>
+												<li><a href="/cart">Cart page</a></li>
 												<li><a href="checkout.html">checkout</a></li>
 												<li><a href="contact.html">contact</a></li>
-												<li><a href="/guestViewAllProducts">product grid</a></li>
+												<li><a href="/viewAllProducts">product grid</a></li>
 												<li><a href="product-details.html">product details</a></li>
 												<li><a href="wishlist.html">wishlist</a></li>
 											</ul></li>
-											
-												<li><a href="/login">login</a></li>
-								
-
+										<li><a href="/logout">logout</a></li>
 									</ul>
 								</nav>
 
 								<div class="mobile-menu clearfix visible-xs visible-sm">
 									<nav id="mobile_dropdown">
 										<ul>
-											<li><a href="/">Home</a></li>
+											<li><a href="/user">Home</a></li>
 											<li><a href="blog.html">blog</a></li>
 											<li><a href="#">pages</a>
 												<ul>
 													<li><a href="blog.html">Blog</a></li>
 													<li><a href="blog-details.html">Blog Details</a></li>
 													<li><a href="cart.html">Cart page</a></li>
-													<li><a href="checkout.html">checkout</a></li>
+													<li><a href="/cart">checkout</a></li>
 													<li><a href="contact.html">contact</a></li>
 													<li><a href="product-grid.html">product grid</a></li>
 													<li><a href="product-details.html">product details</a></li>
@@ -117,8 +113,9 @@
 										<a href="#"><i class="icon-user icons"></i></a>
 									</div>
 									<div class="htc__shopping__cart">
-										<a class="cart__menu" href="/login"><i
-											class="icon-handbag icons"></i></a>
+										<a class="cart__menu" href="/cart"><i
+											class="icon-handbag icons"></i></a> <a href="/cart"><span
+											class="htc__qua">${sessionScope.myCartNum}</span></a>
 									</div>
 								</div>
 							</div>
@@ -131,7 +128,7 @@
 		</header>
 		<!-- End Header Area --
         </header>
-          <div class="body__overlay"></div>
+        <div class="body__overlay"></div>
 		<!-- Start Offset Wrapper -->
 		<div class="offset__wrapper">
 			<!-- Start Search Popap -->
@@ -140,8 +137,9 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="search__inner">
-								<form:form action="/guestSearch" method="get">
-									<input name="searchInput" placeholder="Search here... " type="text">
+								<form:form action="/search" method="get">
+									<input name="searchInput" placeholder="Search here... "
+										type="text">
 									<button type="submit"></button>
 								</form:form>
 								<div class="search__close__btn">
@@ -154,11 +152,56 @@
 				</div>
 			</div>
 			<!-- End Search Popap -->
-			
+			<!-- Start Cart Panel -->
+			<div class="shopping__cart">
+				<div class="shopping__cart__inner">
+					<div class="offsetmenu__close__btn">
+						<a href="#"><i class="zmdi zmdi-close"></i></a>
+					</div>
+					<div class="shp__cart__wrap">
+						<c:if test="${not empty myCartItems}">
+							<c:forEach var="map" items="${sessionScope.myCartItems}">
+								<div class="shp__single__product">
+									<div class="shp__pro__thumb">
+										<a href="#"> <img
+											src="/images/product/${map.value.productEntity.images}"
+											alt="product images">
+										</a>
+									</div>
+									<div class="shp__pro__details">
+										<h2>
+											<a href="product-details.html">${map.value.productEntity.name}</a>
+										</h2>
+										<span class="quantity">${map.value.quantity}</span> <span
+											class="shp__price">${map.value.productEntity.price}</span>
+									</div>
+									<div class="remove__btn">
+										<a href="/cart/remove/${map.value.productEntity.id}"
+											title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+									</div>
+								</div>
+							</c:forEach>
+						</c:if>
+						<c:if test="${myCartItems.size()==0}">
+							<br>
+							<div class="alert alert-warning">There is no data</div>
+						</c:if>
+					</div>
+					<ul class="shoping__total">
+						<li class="subtotal">Subtotal:</li>
+						<li class="total__price">$${sessionScope.myCartTotal}</li>
+					</ul>
+					<ul class="shopping__btn">
+						<li><a href="/cart">View Cart</a></li>
+						<li class="shp__checkout"><a href="cart/checkout">Checkout</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- End Cart Panel -->
 		</div>
-	
+		</div>
 		<!-- End Offset Wrapper -->
-        <!-- End Header Area -->
+		<!-- End Header Area -->
 		<!-- Placed js at the end of the document so the pages load faster -->
 
 		<!-- jquery latest version -->
