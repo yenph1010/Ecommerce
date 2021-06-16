@@ -133,12 +133,12 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "/checkoutforms", method = RequestMethod.GET)
-	public String addProducts(Model model, HttpSession session, @ModelAttribute("Orders") OrderEntity orderEntity) {
+	public String addProducts(Model model, HttpSession session, @ModelAttribute("Order") OrderEntity orderEntity) {
 		model.addAttribute("transactionEntity", new TransactionEntity());
-		return "orders";
+		return "checkout";
 	}
 
-	@RequestMapping(value = "/Transaction", method = RequestMethod.GET)
+	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
 	public String viewCheckout(ModelMap mm, HttpSession session,
 			@ModelAttribute("transactionEntity") TransactionEntity transactionEntity) throws NoSuchAlgorithmException {
 		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
@@ -153,13 +153,10 @@ public class CartController {
 			orderEntity.setTotal(entry.getValue().getProductEntity().getPrice());
 			orderEntity.setSale(entry.getValue().getProductEntity().getSale());
 			orderEntity.setQuantity(entry.getValue().getQuantity());
-			/*
-			 * receiptItem.setReceiptItemStatus(true);
-			 */
+			
 			orderService.newOrder(orderEntity);
 		}
-		session.removeAttribute("myCartNum");
-		/* session.getAttribute("myCartNum"); */
+		session.removeAttribute("myCartNum");	
 		session.removeAttribute("myCartItems");
 		return "shipping";
 	}

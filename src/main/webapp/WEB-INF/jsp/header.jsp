@@ -56,29 +56,28 @@
 							<div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
 								<nav class="main__menu__nav hidden-xs hidden-sm">
 									<ul class="main__menu">
-										<li class="drop"><a href="">Home</a></li>
+										<li class="drop"><a href="/">Home</a></li>
 										<li class="drop"><a href="#">Product</a>
 											<ul class="dropdown">
-												<li><a href="product-grid.html">Table</a></li>
-												<li><a href="product-details.html">Chair</a></li>
-												<li><a href="product-details.html">Bed</a></li>
-												<li><a href="product-details.html">Others</a></li>
+												<li><a href="/guestSearch/1">Table</a></li>
+												<li><a href="/guestSearch/2">Chair</a></li>
+												<li><a href="/guestSearch/3">Bed</a></li>
+												<li><a href="/guestSearch/4">Others</a></li>
 											</ul></li>
-										<li class="drop"><a href="blog.html">blog</a>
+										<li class="drop"><a href="#">blog</a>
 											<ul class="dropdown">
-												<li><a href="blog.html">Blog Grid</a></li>
-												<li><a href="blog-details.html">Blog Details</a></li>
+												<li><a href="#">Blog Grid</a></li>
+												<li><a href="#">Blog Details</a></li>
 											</ul></li>
 										<li class="drop"><a href="#">Pages</a>
 											<ul class="dropdown">
-												<li><a href="blog.html">Blog</a></li>
-												<li><a href="blog-details.html">Blog Details</a></li>
-												<li><a href="cart.html">Cart page</a></li>
-												<li><a href="checkout.html">checkout</a></li>
-												<li><a href="contact.html">contact</a></li>
+												<li><a href="#">Blog</a></li>
+												<li><a href="#">Blog Details</a></li>
+												<li><a href="/login">Cart page</a></li>
+												<li><a href="/login">checkout</a></li>
+												<li><a href="#">contact</a></li>
 												<li><a href="/guestViewAllProducts">product grid</a></li>
-												<li><a href="product-details.html">product details</a></li>
-												<li><a href="wishlist.html">wishlist</a></li>
+												<li><a href="#">wishlist</a></li>
 											</ul></li>
 											
 												<li><a href="/login">login</a></li>
@@ -91,19 +90,18 @@
 									<nav id="mobile_dropdown">
 										<ul>
 											<li><a href="/">Home</a></li>
-											<li><a href="blog.html">blog</a></li>
+											<li><a href="#">blog</a></li>
 											<li><a href="#">pages</a>
 												<ul>
-													<li><a href="blog.html">Blog</a></li>
-													<li><a href="blog-details.html">Blog Details</a></li>
+													<li><a href="#">Blog</a></li>
+													<li><a href="#">Blog Details</a></li>
 													<li><a href="cart.html">Cart page</a></li>
 													<li><a href="checkout.html">checkout</a></li>
-													<li><a href="contact.html">contact</a></li>
-													<li><a href="product-grid.html">product grid</a></li>
-													<li><a href="product-details.html">product details</a></li>
-													<li><a href="wishlist.html">wishlist</a></li>
+													<li><a href="#">contact</a></li>
+													<li><a href="/guestViewAllProducts">product grid</a></li>
+													<li><a href="#">wishlist</a></li>
 												</ul></li>
-											<li><a href="contact.html">contact</a></li>
+											<li><a href="#">contact</a></li>
 										</ul>
 									</nav>
 								</div>

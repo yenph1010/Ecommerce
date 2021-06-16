@@ -137,11 +137,11 @@
 											<ul class="fr__pro__prize">
 												<c:choose>
 													<c:when test="${product.sale== 0}">
-														<li class="old__prize">${product.price}</li>
+														<li class="old__prize">$${product.price}</li>
 													</c:when>
 													<c:otherwise>
-														<li class="old__prize old_price">${product.price}</li>
-														<li class="sale_price">${product.sale}</li>
+														<li class="old__prize old_price">$${product.price}</li>
+														<li class="sale_price">$${product.sale}</li>
 													</c:otherwise>
 												</c:choose>
 											</ul>

@@ -24,7 +24,7 @@
 		<div class="container-fluid">
 			<div class="d-flex align-items-center justify-content-between small">
 				<div class="text-muted-1">
-					© 2020 <b>Admin Page</b>
+					© 2021 <b>Admin Page</b>
 				</div>
 				<div class="footer-links">
 					<a href="#">Privacy Policy</a> <a href="#">Terms &amp;

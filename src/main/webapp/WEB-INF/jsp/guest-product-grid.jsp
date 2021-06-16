@@ -108,7 +108,7 @@
 												<div class="category">
 													<div class="ht__cat__thumb">
 														<a href="/guestViewProduct/${product.id}"> <img
-															src="images/product/${product.images}"
+															src="/images/product/${product.images}"
 															alt="product images">
 														</a>
 													</div>
@@ -129,11 +129,11 @@
 														<ul class="fr__pro__prize">
 															<c:choose>
 																<c:when test="${product.sale== 0}">
-																	<li class="old__prize">${product.price}</li>
+																	<li class="old__prize">$${product.price}</li>
 																</c:when>
 																<c:otherwise>
-																	<li class="old__prize old_price">${product.price}</li>
-																	<li class="sale_price">${product.sale}</li>
+																	<li class="old__prize old_price">$${product.price}</li>
+																	<li class="sale_price">$${product.sale}</li>
 																</c:otherwise>
 															</c:choose>
 
@@ -171,11 +171,11 @@
 															<ul class="pro__prize">
 																<c:choose>
 																	<c:when test="${product.sale== 0}">
-																		<li class="old__prize">${product.price}</li>
+																		<li class="old__prize">$${product.price}</li>
 																	</c:when>
 																	<c:otherwise>
-																		<li class="old__prize old_price">${product.price}</li>
-																		<li class="sale_price">${product.sale}</li>
+																		<li class="old__prize old_price">$${product.price}</li>
+																		<li class="sale_price">$${product.sale}</li>
 																	</c:otherwise>
 																</c:choose>
 															</ul>
@@ -256,16 +256,10 @@
 						<div class="htc__category">
 							<h4 class="title__line--4">categories</h4>
 							<ul class="ht__cat__list">
-								<li><a href="#">Clothing</a></li>
-								<li><a href="#">Bags</a></li>
-								<li><a href="#">Shoes</a></li>
-								<li><a href="#">Jewelry</a></li>
-								<li><a href="#">Accessories</a></li>
-								<li><a href="#">Food / Drink Store</a></li>
-								<li><a href="#">Gift Store</a></li>
-								<li><a href="#">Accessories</a></li>
-								<li><a href="#">Watch</a></li>
-								<li><a href="#">Other</a></li>
+								<li><a href="/guestSearch/1">Table</a></li>
+								<li><a href="/guestSearch/2">Chair</a></li>
+								<li><a href="/guestSearch/3">Bed</a></li>
+								<li><a href="/guestSearch/4">Others</a></li>
 							</ul>
 						</div>
 						<!-- End Category Area -->
@@ -299,15 +293,10 @@
 						<div class="htc__tag">
 							<h4 class="title__line--4">tags</h4>
 							<ul class="ht__tag__list">
-								<li><a href="#">Clothing</a></li>
-								<li><a href="#">bag</a></li>
-								<li><a href="#">Shoes</a></li>
-								<li><a href="#">Jewelry</a></li>
-								<li><a href="#">Food</a></li>
-								<li><a href="#">Aceessories</a></li>
-								<li><a href="#">Store</a></li>
-								<li><a href="#">Watch</a></li>
-								<li><a href="#">Other</a></li>
+								<li><a href="/search/1">Table</a></li>
+								<li><a href="/search/2">Chair</a></li>
+								<li><a href="/search/3">Bed</a></li>
+								<li><a href="/search/4">Others</a></li>
 							</ul>
 						</div>
 						<!-- End Tag Area -->

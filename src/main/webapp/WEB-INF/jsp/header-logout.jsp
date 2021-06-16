@@ -58,10 +58,10 @@
 										<li class="drop"><a href="/user">Home</a></li>
 										<li class="drop"><a href="#">Product</a>
 											<ul class="dropdown">
-												<li><a href="product-grid.html">Table</a></li>
-												<li><a href="product-details.html">Chair</a></li>
-												<li><a href="product-details.html">Bed</a></li>
-												<li><a href="product-details.html">Others</a></li>
+												<li><a href="/search/1">Table</a></li>
+												<li><a href="/search/2">Chair</a></li>
+												<li><a href="/search/3">Bed</a></li>
+												<li><a href="/search/4">Others</a></li>
 											</ul></li>
 										<li class="drop"><a href="blog.html">blog</a>
 											<ul class="dropdown">

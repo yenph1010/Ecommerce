@@ -26,12 +26,12 @@
 			<div class="container-fluid">
 				<h2 class="mt-30 page-title">Products</h2>
 				<ol class="breadcrumb mb-30">
-					<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+					<li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
 					<li class="breadcrumb-item active">Products</li>
 				</ol>
 				<div class="row justify-content-between">
 					<div class="col-lg-12">
-						<a href="addProduct" class="add-btn hover-btn">Add New</a>
+						<a href="/addProduct" class="add-btn hover-btn">Add New</a>
 					</div>
 					<div class="col-lg-3 col-md-4">
 						<div class="bulk-section mt-30">
@@ -51,14 +51,18 @@
 					<div class="col-lg-5 col-md-6">
 						<div class="bulk-section mt-30">
 							<div class="search-by-name-input">
-								<input type="text" class="form-control" placeholder="Search">
+								<form:form action="/productSearch" method="get">
+									<input type="text" name="searchInput" class="form-control"
+										placeholder="Search">
+								</form:form>
 							</div>
 							<div class="input-group">
-								<%-- <form:select path="categories.id" id="category" name="category"
-									class="form-control show-tick">
-									<form:option value="-1">-- Please select --</form:option>
-									<form:options items="${categories}" />
-								</form:select> --%>
+								<select id="category" name="category" class="form-control">
+									<option value="1">Table</option>
+									<option value="2">Chair</option>
+									<option value="3">Bed</option>
+									<option value="4">Other</option>
+								</select>
 								<div class="input-group-append">
 									<button class="status-btn hover-btn" type="submit">Search
 										Category</button>
@@ -98,7 +102,7 @@
 														<td>${product.id}</td>
 														<td>
 															<div class="cate-img-5">
-																<img src="images/product/${product.images}" alt="">
+																<img src="/images/product/${product.images}" alt="">
 															</div>
 														</td>
 														<td>${product.name}</td>
@@ -107,9 +111,9 @@
 														<td>${product.quantity}</td>
 														<td>${product.sale}</td>
 														<td class="action-btns"><a
-															href="editProduct/${product.id}" class="edit-btn"
+															href="/editProduct/${product.id}" class="edit-btn"
 															title="Edit"><i class="fas fa-edit"></i></a> <a
-															href="deleteproduct/${product.id}" class="delete-btn"
+															href="/deleteproduct/${product.id}" class="delete-btn"
 															title="Delete"><i class="fas fa-trash-alt"></i></a></td>
 													</tr>
 												</c:forEach>

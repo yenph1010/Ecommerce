@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,16 +31,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.AccountEntity;
 import com.example.demo.entity.CategoryEntity;
+import com.example.demo.entity.OrderEntity;
 import com.example.demo.entity.ProductEntity;
 import com.example.demo.entity.RoleEntity;
+import com.example.demo.entity.TransactionEntity;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.CategoryService;
+import com.example.demo.service.OrderService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.RoleService;
+import com.example.demo.service.TransactionService;
 import com.example.demo.service.UserService;
 
 @Controller
@@ -64,6 +69,12 @@ public class MainController {
 
 	@Autowired
 	ProductRepository productRepository;
+
+	@Autowired
+	private TransactionService transactionService;
+
+	@Autowired
+	private OrderService orderService;
 
 ////////////////////	Register, Login, Logout     ////////////////////
 	@RequestMapping({ "/", "" })
@@ -254,8 +265,6 @@ public class MainController {
 	@RequestMapping("/productsadmin")
 	public String getAllProductAdmin(Model model) {
 		model.addAttribute("productList", productService.getProductEntities());
-//		List<CategoryEntity> categories = categoryService.CategoryEntityAll();
-//		model.addAttribute("categories", categories);
 		return "products";
 	}
 
@@ -272,7 +281,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/searchByCategory", method = RequestMethod.POST)
-	public String searchByCategory(@RequestParam("id") int id, Model model) {
+	public String searchByCategory(@RequestParam("value") int id, Model model) {
 		List<ProductEntity> resultList;
 		if (id != 0) {
 			resultList = (List<ProductEntity>) productRepository.findAll();
@@ -369,6 +378,18 @@ public class MainController {
 		return "guest-product-grid";
 	}
 
+	@RequestMapping(value = "/guestSearch/{id}", method = RequestMethod.GET)
+	public String guestSearchCategory(@PathVariable Integer id, Model model) {
+		List<ProductEntity> resultList;
+		if (id == 0) {
+			resultList = (List<ProductEntity>) productRepository.findAll();
+		} else {
+			resultList = productRepository.findByCategoryEntityId(id);
+		}
+		model.addAttribute("productList", resultList);
+		return "guest-product-grid";
+	}
+
 	@RequestMapping(value = "/guestViewAllProducts", method = RequestMethod.GET)
 	public String guestViewAllProducts(Model model) {
 		model.addAttribute("productList", productService.getProductEntities());
@@ -395,6 +416,18 @@ public class MainController {
 		return "product-grid";
 	}
 
+	@RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
+	public String searchCategory(@PathVariable Integer id, Model model) {
+		List<ProductEntity> resultList;
+		if (id == 0) {
+			resultList = (List<ProductEntity>) productRepository.findAll();
+		} else {
+			resultList = productRepository.findByCategoryEntityId(id);
+		}
+		model.addAttribute("productList", resultList);
+		return "product-grid";
+	}
+
 	@RequestMapping(value = "/viewAllProducts", method = RequestMethod.GET)
 	public String viewAllProducts(Model model) {
 		model.addAttribute("productList", productService.getProductEntities());
@@ -408,4 +441,29 @@ public class MainController {
 		return "product-details";
 	}
 
+////////////////////Order ////////////////////
+	@RequestMapping("/orders")
+	public String getOrders(Model model) {
+		model.addAttribute("orders", orderService.getOrderEntities());
+		model.addAttribute("transaction", transactionService.transactionEntities());
+		return "orders";
+	}
+
+	@RequestMapping(value = { "/viewdetails/{id}/{transactionname}" })
+	public String getViewdetails(ModelMap model, @PathVariable int id) {
+		List<OrderEntity> orderEntities = orderService.getIDTransaction(id);
+		TransactionEntity transactionEntity = transactionService.findbyTransaction(id);
+		model.addAttribute("transactionEntity", transactionEntity);
+		model.addAttribute("orderEntities", orderEntities);
+		return "order_view";
+	}
+
+	@RequestMapping(value = { "/invoice/" })
+	public String getinvoice(ModelMap model, @RequestParam("id") int id) {
+		List<OrderEntity> orderEntities = orderService.getIDTransaction(id);
+		TransactionEntity transactionEntity = transactionService.findbyTransaction(id);
+		model.addAttribute("transactionEntity", transactionEntity);
+		model.addAttribute("orderEntities", orderEntities);
+		return "order_view";
+	}
 }

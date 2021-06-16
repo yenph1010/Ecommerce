@@ -120,12 +120,12 @@
 						<div class="collapse" id="collapseProducts"
 							aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link sub_nav_link active" href="productsadmin">All
+								<a class="nav-link sub_nav_link active" href="/productsadmin">All
 									Products</a> <a class="nav-link sub_nav_link"
-									href="addProduct">Add Product</a>
+									href="/addProduct">Add Product</a>
 							</nav>
 						</div>
-						<a class="nav-link" href="orders.html">
+						<a class="nav-link" href="/orders">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-cart-arrow-down"></i>
 							</div> Orders

@@ -90,9 +90,9 @@
 													<c:when test="${map.value.productEntity.sale== 0}">
 														<td class="product-name"><a href="#">${map.value.productEntity.name}</a>
 															<ul class="pro__prize">
-																<li class="old__prize">${map.value.productEntity.price}</li>
+																<li class="old__prize">$${map.value.productEntity.price}</li>
 															</ul></td>
-														<td class="product-price"><span class="amount">${map.value.productEntity.price}</span></td>
+														<td class="product-price"><span class="amount">$${map.value.productEntity.price}</span></td>
 														<td class="product-quantity"><input type="number"
 															min="1" value="${map.value.quantity}" max="10" /></td>
 														<td class="product-subtotal">$${map.value.quantity *
@@ -101,10 +101,10 @@
 													<c:otherwise>
 													<td class="product-name"><a href="#">${map.value.productEntity.name}</a>
 															<ul class="pro__prize">
-														<li class="old__prize old_price">${map.value.productEntity.price}</li>
-														<li class="sale_price">${map.value.productEntity.sale}</li>
+														<li class="old__prize old_price">$${map.value.productEntity.price}</li>
+														<li class="sale_price">$${map.value.productEntity.sale}</li>
 														</ul></td>
-														<td class="product-price"><span class="amount">${map.value.productEntity.sale}</span></td>
+														<td class="product-price"><span class="amount">$${map.value.productEntity.sale}</span></td>
 														<td class="product-quantity"><input type="number"
 															min="1" value="${map.value.quantity}" max="10" /></td>
 														<td class="product-subtotal">$${map.value.quantity *
