@@ -68,87 +68,61 @@
 		<div class="checkout-wrap ptb--100">
 			<div class="container">
 				<div class="row">
-					<form:form method="POST" action="/cart/transaction" modelAttribute="transactionEntity">
+					<form:form method="POST" action="/cart/transaction"
+						modelAttribute="transactionEntity">
 						<div class="col-md-8">
 							<div class="checkout__inner">
 								<div class="accordion-list">
 									<div class="accordion">
-										<div class="accordion__title">Billing Information</div>
+										<div class="accordion__title">Billing & Shipping
+											Information</div>
 										<div class="accordion__body">
 											<div class="bilinfo">
-												
-													<div class="row">
-														<div class="col-md-12">
-															<div class="single-input mt-0">
-																<select name="bil-country" id="bil-country">
-																	<option value="select">Select your country</option>
-																	<option value="arb">Arab Emirates</option>
-																	<option value="ban">Bangladesh</option>
-																	<option value="ind">India</option>
-																	<option value="uk">United Kingdom</option>
-																	<option value="usa">United States</option>
-																</select>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="single-input">
-																<form:input type="text" path="transactionname"
-																	placeholder="First name" />
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="single-input">
-																<form:input type="text" path="security"
-																	placeholder="Security" />
-															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="single-input">
-																<input type="text" placeholder="Company name">
-															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="single-input">
-																<form:input type="text" path="transactionaddress"
-																	placeholder="Street Address" />
-															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="single-input">
-																<input type="text"
-																	placeholder="Apartment/Block/House (optional)">
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="single-input">
-																<input type="text" placeholder="City/State">
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="single-input">
-																<input type="text" placeholder="Post code/ zip">
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="single-input">
-																<form:input type="email" path="transactionmail"
-																	placeholder="Email address" />
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="single-input">
-																<form:input type="text" path="transactionphone"
-																	placeholder="Phone number" />
-															</div>
+
+												<div class="row">
+													<div class="col-md-12">
+														<div class="single-input">
+															<form:input type="text" path="transactionname"
+																placeholder="Full name"/>
+															<form:errors path="transactionname" cssClass="error" />
 														</div>
 													</div>
-												
+													<div class="col-md-12">
+														<div class="single-input">
+															<form:input type="text" path="transactionaddress"
+																placeholder="Address"/>
+															<form:errors path="transactionaddress" cssClass="error" />
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="single-input">
+															<form:input type="text" path="transactionmail"
+																placeholder="Email address"/>
+															<form:errors path="transactionmail" cssClass="error" />
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="single-input">
+															<form:input type="text" path="transactionphone"
+																placeholder="Phone number"/>
+																<form:errors path="transactionphone" cssClass="error" />
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="single-input">
+															<form:hidden path="payment"
+																value="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}" 
+															/>
+														</div>
+													</div>
+												</div>
+
 											</div>
 										</div>
-										
+
 										<div class="accordion__title">payment information</div>
 										<div class="accordion__body">
-											<div class="paymentinfo">												
+											<div class="paymentinfo">
 												<div class="single-method">
 													<a href="#"><i class="zmdi zmdi-long-arrow-right"></i>Check/
 														Money Order</a>
@@ -158,71 +132,71 @@
 														class="zmdi zmdi-long-arrow-right"></i>Credit Card</a>
 												</div>
 												<div class="paymentinfo-credit-content">
-													
-														<div class="row">
-															<div class="col-md-12">
-																<div class="single-input mt-0">
-																	<input type="text" placeholder="Name on card">
-																</div>
-															</div>
-															<div class="col-md-12">
-																<div class="single-input">
-																	<select name="bil-country" id="payment-info-type">
-																		<option value="select">Card type</option>
-																		<option value="card-1">Card type 1</option>
-																		<option value="card-2">Card type 2</option>
-																		<option value="card-3">Card type 3</option>
-																	</select>
-																</div>
-															</div>
-															<div class="col-md-12">
-																<div class="single-input">
-																	<input type="text" placeholder="Credit Card Number*">
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="single-input">
-																	<select>
-																		<option>Select Month</option>
-																		<option>Jan</option>
-																		<option>Feb</option>
-																		<option>Mar</option>
-																		<option>Apr</option>
-																		<option>May</option>
-																		<option>Jun</option>
-																		<option>Jul</option>
-																		<option>Aug</option>
-																		<option>Sep</option>
-																		<option>Oct</option>
-																		<option>Nov</option>
-																		<option>Dec</option>
-																	</select>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="single-input">
-																	<select>
-																		<option>Select Year</option>
-																		<option>2015</option>
-																		<option>2016</option>
-																		<option>2017</option>
-																		<option>2018</option>
-																		<option>2019</option>
-																		<option>2020</option>
-																		<option>2021</option>
-																		<option>2022</option>
-																		<option>2023</option>
-																	</select>
-																</div>
-															</div>
-															<div class="col-md-12">
-																<div class="single-input">
-																	<input type="text"
-																		placeholder="Card verification number*">
-																</div>
+
+													<div class="row">
+														<div class="col-md-12">
+															<div class="single-input mt-0">
+																<input type="text" placeholder="Name on card">
 															</div>
 														</div>
-													
+														<div class="col-md-12">
+															<div class="single-input">
+																<select name="bil-country" id="payment-info-type">
+																	<option value="select">Card type</option>
+																	<option value="card-1">Card type 1</option>
+																	<option value="card-2">Card type 2</option>
+																	<option value="card-3">Card type 3</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="single-input">
+																<input type="text" placeholder="Credit Card Number*">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="single-input">
+																<select>
+																	<option>Select Month</option>
+																	<option>Jan</option>
+																	<option>Feb</option>
+																	<option>Mar</option>
+																	<option>Apr</option>
+																	<option>May</option>
+																	<option>Jun</option>
+																	<option>Jul</option>
+																	<option>Aug</option>
+																	<option>Sep</option>
+																	<option>Oct</option>
+																	<option>Nov</option>
+																	<option>Dec</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="single-input">
+																<select>
+																	<option>Select Year</option>
+																	<option>2015</option>
+																	<option>2016</option>
+																	<option>2017</option>
+																	<option>2018</option>
+																	<option>2019</option>
+																	<option>2020</option>
+																	<option>2021</option>
+																	<option>2022</option>
+																	<option>2023</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="single-input">
+																<input type="text"
+																	placeholder="Card verification number*">
+															</div>
+														</div>
+													</div>
+
 												</div>
 											</div>
 										</div>
@@ -266,7 +240,7 @@
 									</div>
 									<div class="order-details__count__single">
 										<h5>Tax</h5>
-										<span class="price">$${sessionScope.myCartTotal * 0.1}</span>
+										<span class="price">$${sessionScope.myCartTotal/10}</span>
 									</div>
 									<div class="order-details__count__single">
 										<h5>Shipping</h5>
@@ -276,7 +250,7 @@
 								<div class="ordre-details__total">
 									<h5>Order total</h5>
 									<span class="price">$${sessionScope.myCartTotal +
-										(sessionScope.myCartTotal * 0.1)}</span>
+										(sessionScope.myCartTotal/10)}</span>
 								</div>
 							</div>
 							<div class="dark-btn ">

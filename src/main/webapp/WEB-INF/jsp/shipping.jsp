@@ -67,73 +67,80 @@
 		<!-- cart-main-area start -->
 		<div class="checkout-wrap ptb--100">
 			<div class="container">
-				<div class="row">					
-						<div class="col-md-8">
-							<div class="checkout__inner">
-								<div class="accordion-list">
-									<div class="accordion">
-										<div class="shipinfo">
-											<h3 class="shipinfo__title">Congratulations! Your order is being processed.</h3>
-											<p>
-												<b>Address:</b> ${transactionEntity.transactionaddress}
-											</p>
-											
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="checkout__inner">
+							<div class="accordion-list">
+								<div class="accordion">
+									<div class="shipinfo">
+										<h3 class="shipinfo__title">Congratulations! Your order
+											is being processed.</h3>
+										<p>
+											<b>Receiver:</b> ${transactionEntity.transactionname}
+										</p>
+										<p>
+											<b>Shipping Address:</b> ${transactionEntity.transactionaddress}
+										</p>
+										<p>
+											<b>Contact Number:</b> ${transactionEntity.transactionphone}
+										</p>
+										<p>Please check our email sent to your email address ${transactionEntity.transactionmail}</p>
 
-						<div class="col-md-4">
-							<div class="order-details">
-								<h5 class="order-details__title">Your Order</h5>
-								<div class="order-details__item">
-									<c:forEach var="map" items="${sessionScope.myCartItems}">
-										<div class="single-item">
-											<div class="single-item__thumb">
-												<img src="/images/product/${map.value.productEntity.images}"
-													alt="ordered item">
-											</div>
-											<div class="single-item__content">
-												<c:choose>
-													<c:when test="${map.value.productEntity.sale== 0}">
-														<a href="#">${map.value.productEntity.name}</a>
-														<span class="price">$${map.value.productEntity.price}</span>
-													</c:when>
-													<c:otherwise>
-														<a href="#">${map.value.productEntity.name}</a>
-														<span class="price">$${map.value.productEntity.sale}</span>
-													</c:otherwise>
-												</c:choose>
-											</div>
-											<div class="single-item__remove">
-												<a href="#"><i class="zmdi zmdi-delete"></i></a>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
-								<div class="order-details__count">
-									<div class="order-details__count__single">
-										<h5>sub total</h5>
-										<span class="price">$${map.value.quantity *
-											map.value.productEntity.sale}</span>
 									</div>
-									<div class="order-details__count__single">
-										<h5>Tax</h5>
-										<span class="price">$${sessionScope.myCartTotal * 0.1}</span>
-									</div>
-									<div class="order-details__count__single">
-										<h5>Shipping</h5>
-										<span class="price">0</span>
-									</div>
-								</div>
-								<div class="ordre-details__total">
-									<h5>Order total</h5>
-									<span class="price">$${sessionScope.myCartTotal +
-										(sessionScope.myCartTotal * 0.1)}</span>
 								</div>
 							</div>
 						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="order-details">
+							<h5 class="order-details__title">Your Order</h5>
+							<div class="order-details__item">
+								<c:forEach var="map" items="${sessionScope.myCartItems}">
+									<div class="single-item">
+										<div class="single-item__thumb">
+											<img src="/images/product/${map.value.productEntity.images}"
+												alt="ordered item">
+										</div>
+										<div class="single-item__content">
+											<c:choose>
+												<c:when test="${map.value.productEntity.sale== 0}">
+													<a href="#">${map.value.productEntity.name}</a>
+													<span class="price">$${map.value.productEntity.price}</span>
+												</c:when>
+												<c:otherwise>
+													<a href="#">${map.value.productEntity.name}</a>
+													<span class="price">$${map.value.productEntity.sale}</span>
+												</c:otherwise>
+											</c:choose>
+										</div>
+										<div class="single-item__remove">
+											<a href="#"><i class="zmdi zmdi-delete"></i></a>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+							<div class="order-details__count">
+								<div class="order-details__count__single">
+									<h5>sub total</h5>
+									<span class="price">$${sessionScope.myCartTotal}</span>
+								</div>
+								<div class="order-details__count__single">
+									<h5>Tax</h5>
+									<span class="price">$${sessionScope.myCartTotal/10}</span>
+								</div>
+								<div class="order-details__count__single">
+									<h5>Shipping</h5>
+									<span class="price">0</span>
+								</div>
+							</div>
+							<div class="ordre-details__total">
+								<h5>Order total</h5>
+								<span class="price">$${sessionScope.myCartTotal +
+									(sessionScope.myCartTotal/10)}</span>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

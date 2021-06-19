@@ -2055,6 +2055,10 @@ select.select__size {
 /*---------------------------------------
   19. Our Cart Area
 ----------------------------------------*/
+.error {
+    color: red;
+    font-style: italic;
+}
 
 .cart-title-area{
     padding-top: 30px;

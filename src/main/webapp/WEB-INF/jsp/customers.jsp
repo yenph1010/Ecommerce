@@ -10,8 +10,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description-gambolthemes" content="">
-<meta name="author-gambolthemes" content="">
+<meta name="description" content="">
+<meta name="author" content="">
 <title>Admin Page</title>
 <link href="/css/styles.css" rel="stylesheet">
 <link href="/css/admin-style.css" rel="stylesheet">
@@ -24,9 +24,9 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-				<h2 class="mt-30 page-title">Customers</h2>
+				<h2 class="mt-30 page-title">Ussers</h2>
 				<ol class="breadcrumb mb-30">
-					<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+					<li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
 					<li class="breadcrumb-item active">Customers</li>
 				</ol>
 				<div class="row">
@@ -34,10 +34,10 @@
 						<div class="card card-static-2 mb-30">
 							<div class="card-title-2">
 								<div class="col-lg-10 col-md-10">
-									<h4>All Customers</h4>
+									<h4>All Users</h4>
 								</div>
 								<div class="col-lg-2 col-md-2">
-									<a href="newUser" class="btn btn-primary">Create User</a>
+									<a href="/newUser" class="btn btn-primary">Create User</a>
 								</div>
 							</div>
 							<div class="card-body-table">

@@ -5,6 +5,7 @@ import com.example.demo.repository.TransactionRepository;
 import com.example.demo.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionEntity;
     }
 
-@Override
+    @Override
     public List<TransactionEntity> transactionEntities(){
         return (List<TransactionEntity>)transactionRepository.findAll();
     }

@@ -7,12 +7,22 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,16 +48,6 @@ import com.example.demo.service.UserService;
 public class CartController {
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private AccountService accountService;
-	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private RoleService roleService;
-
-	@Autowired
-	private CategoryService categoryService;
 
 	@Autowired
 	private TransactionService transactionService;
@@ -64,6 +64,9 @@ public class CartController {
 	@Autowired
 	AccountRepository accountRepository;
 
+	@Autowired
+    private JavaMailSender mailSender;
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showCart() {
 		return "cart";
@@ -107,16 +110,6 @@ public class CartController {
 		return count;
 	}
 
-	@RequestMapping(value = "sub/{id}", method = RequestMethod.GET)
-	public String viewUpdate(ModelMap mm, HttpSession session, @PathVariable("id") Integer id) {
-		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
-		if (cartItems == null) {
-			cartItems = new HashMap<>();
-		}
-		session.setAttribute("myCartItems", cartItems);
-		return "cart";
-	}
-
 	@RequestMapping(value = "remove/{id}", method = RequestMethod.GET)
 	public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("id") Integer id) {
 		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
@@ -138,45 +131,61 @@ public class CartController {
 		return "checkout";
 	}
 
+	@Transactional 
 	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
-	public String viewCheckout(ModelMap mm, HttpSession session,
-			@ModelAttribute("transactionEntity") TransactionEntity transactionEntity) throws NoSuchAlgorithmException {
-		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
-		TransactionEntity transactionEntity1 = transactionService.newTransaction(transactionEntity);
-		transactionEntity1.setTransactiondate(new Timestamp(new Date().getTime()));
-		transactionEntity1.setTransactionstatus(true);
-		transactionEntity1.setSecurity(getSHAHash(transactionEntity.getSecurity()));
-		for (Map.Entry<Integer, CartEntity> entry : cartItems.entrySet()) {
-			OrderEntity orderEntity = new OrderEntity();
-			orderEntity.setTransactionEntity(transactionEntity1);
-			orderEntity.setProductEntity(entry.getValue().getProductEntity());
-			orderEntity.setTotal(entry.getValue().getProductEntity().getPrice());
-			orderEntity.setSale(entry.getValue().getProductEntity().getSale());
-			orderEntity.setQuantity(entry.getValue().getQuantity());
-			
-			orderService.newOrder(orderEntity);
+	public String viewCheckout(HttpSession session,
+			@Valid @ModelAttribute("transactionEntity") TransactionEntity transactionEntity, BindingResult result)
+			throws NoSuchAlgorithmException {
+		// Validate result
+		if (result.hasErrors()) {
+			return "checkout";
+		} else {
+			HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
+			TransactionEntity transactionEntity1 = transactionService.newTransaction(transactionEntity);
+			transactionEntity1.setTransactiondate(new Timestamp(new Date().getTime()));
+			transactionEntity1.setTransactionstatus("Process");
+			for (Map.Entry<Integer, CartEntity> entry : cartItems.entrySet()) {
+				OrderEntity orderEntity = new OrderEntity();
+				orderEntity.setTransactionEntity(transactionEntity1);
+				orderEntity.setProductEntity(entry.getValue().getProductEntity());
+				orderEntity.setTotal(entry.getValue().getProductEntity().getPrice());
+				orderEntity.setSale(entry.getValue().getProductEntity().getSale());
+				orderEntity.setQuantity(entry.getValue().getQuantity());
+				
+				//Update product quantity
+				int id = entry.getValue().getProductEntity().getId();
+				ProductEntity productEntity = productService.editProduct(id);
+				productEntity.setQuantity(entry.getValue().getProductEntity().getQuantity() - entry.getValue().getQuantity());
+
+				orderService.newOrder(orderEntity);
+			}
+			sendEmail(transactionEntity1.getTransactionmail());
+			session.removeAttribute("myCartNum");
+			session.removeAttribute("myCartItems");
+			return "shipping";
 		}
-		session.removeAttribute("myCartNum");	
-		session.removeAttribute("myCartItems");
-		return "shipping";
 	}
-
-	public static String getSHAHash(String input) throws NoSuchAlgorithmException {
-
+	
+	public void sendEmail(String transactionmail) {
+		String from = "yen.19921010@gmail.com";
+		String to = transactionmail;
+		 
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);
+		 
 		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-1");
-			byte[] messageDigest = md.digest(input.getBytes());
-			return convertByteToHex(messageDigest);
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			helper.setSubject("You have successfully ordered products on our website.");
+		
+		helper.setFrom(from);
+		helper.setTo(to);
+		 
+		boolean html = true;
+		helper.setText("<b>Dear customer</b>,<br><i>We are processing your order to be shipped. Please wait 3~5 days until the order comes.</i>", html);
+		} catch (MessagingException e) {
+			
+			e.printStackTrace();
 		}
-	}
+		mailSender.send(message);
+    }
 
-	public static String convertByteToHex(byte[] data) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < data.length; i++) {
-			sb.append(Integer.toString((data[i] & 0xff) + 0x100, 16).substring(1));
-		}
-		return sb.toString();
-	}
 }

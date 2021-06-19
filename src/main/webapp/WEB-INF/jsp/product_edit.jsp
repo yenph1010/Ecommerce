@@ -56,8 +56,8 @@
 			<div class="container-fluid">
 				<h2 class="mt-30 page-title">Products</h2>
 				<ol class="breadcrumb mb-30">
-					<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-					<li class="breadcrumb-item"><a href="products.html">Products</a></li>
+					<li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+					<li class="breadcrumb-item"><a href="/productsadmin">Products</a></li>
 					<c:choose>
 						<c:when test="${type.equals('update')}">
 							<li class="breadcrumb-item active">Edit Product</li>

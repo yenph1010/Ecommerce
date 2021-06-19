@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>InHouse</title>
+<title>Furniture Website</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,20 +64,11 @@
 												<li><a href="/guestSearch/3">Bed</a></li>
 												<li><a href="/guestSearch/4">Others</a></li>
 											</ul></li>
-										<li class="drop"><a href="#">blog</a>
-											<ul class="dropdown">
-												<li><a href="#">Blog Grid</a></li>
-												<li><a href="#">Blog Details</a></li>
-											</ul></li>
 										<li class="drop"><a href="#">Pages</a>
-											<ul class="dropdown">
-												<li><a href="#">Blog</a></li>
-												<li><a href="#">Blog Details</a></li>
+											<ul class="dropdown">												
 												<li><a href="/login">Cart page</a></li>
 												<li><a href="/login">checkout</a></li>
-												<li><a href="#">contact</a></li>
 												<li><a href="/guestViewAllProducts">product grid</a></li>
-												<li><a href="#">wishlist</a></li>
 											</ul></li>
 											
 												<li><a href="/login">login</a></li>
@@ -90,18 +81,12 @@
 									<nav id="mobile_dropdown">
 										<ul>
 											<li><a href="/">Home</a></li>
-											<li><a href="#">blog</a></li>
 											<li><a href="#">pages</a>
 												<ul>
-													<li><a href="#">Blog</a></li>
-													<li><a href="#">Blog Details</a></li>
-													<li><a href="cart.html">Cart page</a></li>
-													<li><a href="checkout.html">checkout</a></li>
-													<li><a href="#">contact</a></li>
+													<li><a href="/login">Cart page</a></li>
+													<li><a href="/login">checkout</a></li>
 													<li><a href="/guestViewAllProducts">product grid</a></li>
-													<li><a href="#">wishlist</a></li>
 												</ul></li>
-											<li><a href="#">contact</a></li>
 										</ul>
 									</nav>
 								</div>

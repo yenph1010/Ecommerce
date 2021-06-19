@@ -54,7 +54,7 @@
 									<h2>collection 2021</h2>
 									<h1>NICE CHAIR</h1>
 									<div class="cr__btn">
-										<a href="cart.html">Shop Now</a>
+										<a href="/login">Shop Now</a>
 									</div>
 								</div>
 							</div>
@@ -80,7 +80,7 @@
 									<h2>collection 2021</h2>
 									<h1>NICE CHAIR</h1>
 									<div class="cr__btn">
-										<a href="cart.html">Shop Now</a>
+										<a href="/login">Shop Now</a>
 									</div>
 								</div>
 							</div>
@@ -161,206 +161,6 @@
 		</div>
 	</section>
 	<!-- End Category Area -->
-	<!-- Start Prize Good Area -->
-	<section class="htc__good__sale bg__cat--3">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-					<div class="fr__prize__inner">
-						<h2>Contrary to popular belief is simply rand.</h2>
-						<h3>Professor at Hamp deny dney College.</h3>
-						<a class="fr__btn" href="#">Read More</a>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-					<div class="prize__inner">
-						<div class="prize__thumb">
-							<img src="images/banner/big-img/1.png" alt="banner images">
-						</div>
-						<div class="banner__info">
-							<div class="pointer__tooltip pointer--3 align-left">
-								<div class="tooltip__box">
-									<h4>Tooltip Left</h4>
-									<p>Lorem ipsum pisaci volupt atem accusa saes ntisdumtiu
-										loperm asaerks.</p>
-								</div>
-							</div>
-							<div class="pointer__tooltip pointer--4 align-top">
-								<div class="tooltip__box">
-									<h4>Tooltip Top</h4>
-									<p>Lorem ipsum pisaci volupt atem accusa saes ntisdumtiu
-										loperm asaerks.</p>
-								</div>
-							</div>
-							<div class="pointer__tooltip pointer--5 align-bottom">
-								<div class="tooltip__box">
-									<h4>Tooltip Bottom</h4>
-									<p>Lorem ipsum pisaci volupt atem accusa saes ntisdumtiu
-										loperm asaerks.</p>
-								</div>
-							</div>
-							<div class="pointer__tooltip pointer--6 align-top">
-								<div class="tooltip__box">
-									<h4>Tooltip Bottom</h4>
-									<p>Lorem ipsum pisaci volupt atem accusa saes ntisdumtiu
-										loperm asaerks.</p>
-								</div>
-							</div>
-							<div class="pointer__tooltip pointer--7 align-top">
-								<div class="tooltip__box">
-									<h4>Tooltip Bottom</h4>
-									<p>Lorem ipsum pisaci volupt atem accusa saes ntisdumtiu
-										loperm asaerks.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End Prize Good Area -->
-	<!-- Start Product Area -->
-	<section class="ftr__product__area ptb--100">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="section__title--2 text-center">
-						<h2 class="title__line">Best Seller</h2>
-						<p>The most popular furniture designs</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="product__wrap clearfix">
-					<!-- Start Single Category -->
-					<div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-						<div class="category">
-							<div class="ht__cat__thumb">
-								<a href="product-details.html"> <img
-									src="images/product/9.jpg" alt="product images">
-								</a>
-							</div>
-							<div class="fr__hover__info">
-								<ul class="product__action">
-									<li><a href="wishlist.html"><i
-											class="icon-heart icons"></i></a></li>
-
-									<li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-									<li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-								</ul>
-							</div>
-							<div class="fr__product__inner">
-								<h4>
-									<a href="product-details.html">Special Wood Basket</a>
-								</h4>
-								<ul class="fr__pro__prize">
-									<li class="old__prize">$30.3</li>
-									<li>$25.9</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- End Single Category -->
-					<!-- Start Single Category -->
-					<div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-						<div class="category">
-							<div class="ht__cat__thumb">
-								<a href="product-details.html"> <img
-									src="images/product/10.jpg" alt="product images">
-								</a>
-							</div>
-							<div class="fr__hover__info">
-								<ul class="product__action">
-									<li><a href="wishlist.html"><i
-											class="icon-heart icons"></i></a></li>
-
-									<li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-									<li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-								</ul>
-							</div>
-							<div class="fr__product__inner">
-								<h4>
-									<a href="product-details.html">voluptatem accusantium</a>
-								</h4>
-								<ul class="fr__pro__prize">
-									<li class="old__prize">$30.3</li>
-									<li>$25.9</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- End Single Category -->
-					<!-- Start Single Category -->
-					<div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-						<div class="category">
-							<div class="ht__cat__thumb">
-								<a href="product-details.html"> <img
-									src="images/product/11.jpg" alt="product images">
-								</a>
-							</div>
-							<div class="fr__hover__info">
-								<ul class="product__action">
-									<li><a href="wishlist.html"><i
-											class="icon-heart icons"></i></a></li>
-
-									<li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-									<li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-								</ul>
-							</div>
-							<div class="fr__product__inner">
-								<h4>
-									<a href="product-details.html">Product Dummy Name</a>
-								</h4>
-								<ul class="fr__pro__prize">
-									<li class="old__prize">$30.3</li>
-									<li>$25.9</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- End Single Category -->
-					<!-- Start Single Category -->
-					<div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-						<div class="category">
-							<div class="ht__cat__thumb">
-								<a href="product-details.html"> <img
-									src="images/product/12.jpg" alt="product images">
-								</a>
-							</div>
-							<div class="fr__hover__info">
-								<ul class="product__action">
-									<li><a href="wishlist.html"><i
-											class="icon-heart icons"></i></a></li>
-
-									<li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-									<li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-								</ul>
-							</div>
-							<div class="fr__product__inner">
-								<h4>
-									<a href="product-details.html">Product Title Here </a>
-								</h4>
-								<ul class="fr__pro__prize">
-									<li class="old__prize">$30.3</li>
-									<li>$25.9</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- End Single Category -->
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End Product Area -->
-
-
-
 	<jsp:include page="footer.jsp"></jsp:include>
 
 

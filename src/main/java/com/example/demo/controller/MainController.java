@@ -38,6 +38,7 @@ import com.example.demo.entity.TransactionEntity;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.ProductRepository;
+import com.example.demo.repository.TransactionRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.CategoryService;
@@ -69,13 +70,16 @@ public class MainController {
 
 	@Autowired
 	ProductRepository productRepository;
+	
+	@Autowired
+	TransactionRepository transactionRepository;
 
 	@Autowired
 	private TransactionService transactionService;
 
 	@Autowired
 	private OrderService orderService;
-
+     
 ////////////////////	Register, Login, Logout     ////////////////////
 	@RequestMapping({ "/", "" })
 	public String indexPage(Model model) {
@@ -449,7 +453,7 @@ public class MainController {
 		return "orders";
 	}
 
-	@RequestMapping(value = { "/viewdetails/{id}/{transactionname}" })
+	@RequestMapping(value = "/viewdetails/{id}", method = RequestMethod.GET)
 	public String getViewdetails(ModelMap model, @PathVariable int id) {
 		List<OrderEntity> orderEntities = orderService.getIDTransaction(id);
 		TransactionEntity transactionEntity = transactionService.findbyTransaction(id);
@@ -458,12 +462,20 @@ public class MainController {
 		return "order_view";
 	}
 
-	@RequestMapping(value = { "/invoice/" })
-	public String getinvoice(ModelMap model, @RequestParam("id") int id) {
+	@RequestMapping(value = "/editOrder/{id}", method = RequestMethod.GET)
+	public String showEditOrder(@PathVariable Integer id, Model model) {
 		List<OrderEntity> orderEntities = orderService.getIDTransaction(id);
 		TransactionEntity transactionEntity = transactionService.findbyTransaction(id);
 		model.addAttribute("transactionEntity", transactionEntity);
 		model.addAttribute("orderEntities", orderEntities);
-		return "order_view";
+		return "order_edit";
+	}
+
+	@RequestMapping(value = "/updateOrder/{id}", method = RequestMethod.POST)
+	public String updateOrder(@ModelAttribute TransactionEntity transactionEntity, @PathVariable Integer id) {
+		TransactionEntity transactionEntity1 = transactionService.findbyTransaction(id);
+		transactionEntity1.setTransactionstatus(transactionEntity.getTransactionstatus());
+		transactionRepository.save(transactionEntity1);
+		return "redirect:/orders";
 	}
 }

@@ -159,17 +159,17 @@
 										</ul>
 										<ul class="cart__price">
 											<li>$${sessionScope.myCartTotal}</li>
-											<li>$${sessionScope.myCartTotal * 0.1}</li>
+											<li>$${sessionScope.myCartTotal/10}</li>
 											<li>0</li>
 										</ul>
 									</div>
 									<div class="cart__total">
 										<span>order total</span> <span>$${sessionScope.myCartTotal
-											+ (sessionScope.myCartTotal * 0.1)}</span>
+											+ (sessionScope.myCartTotal/10)}</span>
 									</div>
 									<ul class="payment__btn">
 										<li class="active"><a href="#">payment</a></li>
-										<li><a href="#">continue shopping</a></li>
+										<li><a href="/user">continue shopping</a></li>
 									</ul>
 								</div>
 							</div>

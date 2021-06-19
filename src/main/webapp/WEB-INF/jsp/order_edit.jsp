@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html lang="en">
 <head>
@@ -26,15 +27,15 @@
 				<ol class="breadcrumb mb-30">
 					<li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
 					<li class="breadcrumb-item"><a href="/orders">Orders</a></li>
-					<li class="breadcrumb-item active">Order View</li>
+					<li class="breadcrumb-item active">Order Edit</li>
 				</ol>
 				<div class="row">
 					<div class="col-xl-12 col-md-12">
 						<div class="card card-static-2 mb-30">
+						<form:form action="/updateOrder/${transactionEntity.id}" method="post" modelAttribute="transactionEntity">
 							<div class="card-title-2">
-								<h2 class="title1458">Invoice</h2>
-								<span class="order-id">Order
-									${transactionEntity.id}</span>
+								<h2 class="title1458">Invoice</h2>								
+								<span class="order-id">Order ${transactionEntity.id}</span>
 							</div>
 							<div class="invoice-content">
 								<div class="row">
@@ -113,20 +114,27 @@
 									<div class="col-lg-5">
 										<div class="select-status">
 											<label for="status">Status*</label>
-											<div class="status-active">${transactionEntity.transactionstatus}</div>
+											<div class="input-group">
+													<form:input path="transactionstatus" type="text"
+														class="form-control" />
+												<div class="input-group-append">
+													<button class="status-btn hover-btn" type="submit">Submit</button>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+						
+						</form:form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</main>
-
-
 		<jsp:include page="footer-admin.jsp"></jsp:include>
 	</div>
+
 	<script src="/js/jquery-3.4.1.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/scripts.js"></script>

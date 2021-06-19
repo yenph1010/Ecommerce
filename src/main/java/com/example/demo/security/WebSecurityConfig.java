@@ -17,7 +17,6 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String USER_ROLE = "USER";
 	private static final String ADMIN_ROLE = "ADMIN";
-	private static final String MANAGER_ROLE = "MANAGER";
 	@Autowired
 	private DataSource dataSource;
 
@@ -48,7 +47,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/editAccount/**").hasAuthority(ADMIN_ROLE)
 		.antMatchers("/AccountAdminAdd/**").hasAuthority(ADMIN_ROLE)
 		.antMatchers("/user/**").hasAuthority(USER_ROLE)
-		.antMatchers("/manager/**").hasAuthority(MANAGER_ROLE)
 		.and()
 		.formLogin().permitAll()
 		.loginPage("/login")

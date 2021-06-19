@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>InHouse</title>
+<title>Furniture Website</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -62,22 +62,12 @@
 												<li><a href="/search/2">Chair</a></li>
 												<li><a href="/search/3">Bed</a></li>
 												<li><a href="/search/4">Others</a></li>
-											</ul></li>
-										<li class="drop"><a href="blog.html">blog</a>
-											<ul class="dropdown">
-												<li><a href="blog.html">Blog Grid</a></li>
-												<li><a href="blog-details.html">Blog Details</a></li>
-											</ul></li>
+											</ul></li>										
 										<li class="drop"><a href="#">Pages</a>
-											<ul class="dropdown">
-												<li><a href="blog.html">Blog</a></li>
-												<li><a href="blog-details.html">Blog Details</a></li>
+											<ul class="dropdown">												
 												<li><a href="/cart">Cart page</a></li>
-												<li><a href="checkout.html">checkout</a></li>
-												<li><a href="contact.html">contact</a></li>
+												<li><a href="/checkoutforms">checkout</a></li>
 												<li><a href="/viewAllProducts">product grid</a></li>
-												<li><a href="product-details.html">product details</a></li>
-												<li><a href="wishlist.html">wishlist</a></li>
 											</ul></li>
 										<li><a href="/logout">logout</a></li>
 									</ul>
@@ -87,19 +77,13 @@
 									<nav id="mobile_dropdown">
 										<ul>
 											<li><a href="/user">Home</a></li>
-											<li><a href="blog.html">blog</a></li>
 											<li><a href="#">pages</a>
 												<ul>
-													<li><a href="blog.html">Blog</a></li>
-													<li><a href="blog-details.html">Blog Details</a></li>
-													<li><a href="cart.html">Cart page</a></li>
+													<li><a href="/cart">Cart page</a></li>
 													<li><a href="/cart">checkout</a></li>
-													<li><a href="contact.html">contact</a></li>
-													<li><a href="product-grid.html">product grid</a></li>
-													<li><a href="product-details.html">product details</a></li>
-													<li><a href="wishlist.html">wishlist</a></li>
+													<li><a href="/checkoutforms">contact</a></li>
+													<li><a href="/viewAllProducts">product grid</a></li>
 												</ul></li>
-											<li><a href="contact.html">contact</a></li>
 										</ul>
 									</nav>
 								</div>

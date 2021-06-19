@@ -28,22 +28,7 @@
 					<li class="breadcrumb-item active">Orders</li>
 				</ol>
 				<div class="row justify-content-between">
-					<div class="col-lg-3 col-md-4">
-						<div class="bulk-section mb-30">
-							<div class="input-group">
-								<select id="action" name="action" class="form-control">
-									<option selected>Bulk Actions</option>
-									<option value="1">Pending</option>
-									<option value="2">Cancel</option>
-									<option value="3">Process</option>
-									<option value="4">Complete</option>
-									<option value="5">Delete</option>
-								</select>
-								<div class="input-group-append">
-									<button class="status-btn hover-btn" type="submit">Apply</button>
-								</div>
-							</div>
-						</div>
+					<div class="col-lg-3 col-md-4">						
 					</div>
 					<div class="col-lg-5 col-md-6">
 						<div class="bulk-section mb-30">
@@ -91,7 +76,7 @@
 												<c:forEach var="s" items="${transaction}">
 													<tr>
 														<td><input type="checkbox" class="check-item"
-															name="ids[]" value="4"></td>
+															name="ids[]" value="${s.id}"></td>
 														<td>${s.id}</td>
 														<td>${s.transactionname}</td>
 														<td>${s.transactionmail}</td>
@@ -99,9 +84,9 @@
 														<td>${s.transactiondate}</td>
 														<td>${s.transactionstatus}</td>
 														<td>$${s.payment}</td>
-														<td class="action-btns"><a href="/viewdetails/${s.id}/${s.transactionname}"
+														<td class="action-btns"><a href="/viewdetails/${s.id}"
 															class="views-btn"><i class="fas fa-eye"></i></a> <a
-															href="#" class="edit-btn"><i
+															href="/editOrder/${s.id}" class="edit-btn"><i
 																class="fas fa-edit"></i></a></td>
 													</tr>
 												</c:forEach>

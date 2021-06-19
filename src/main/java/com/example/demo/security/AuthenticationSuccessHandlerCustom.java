@@ -17,7 +17,6 @@ import java.util.List;
 public class AuthenticationSuccessHandlerCustom implements AuthenticationSuccessHandler {
 	private static final String USER_ROLE = "USER";
 	private static final String ADMIN_ROLE = "ADMIN";
-	private static final String MANAGER_ROLE = "MANAGER";
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	@Override
@@ -25,17 +24,12 @@ public class AuthenticationSuccessHandlerCustom implements AuthenticationSuccess
 			Authentication authentication) throws IOException, ServletException {
 		boolean isAdminRole = false;
 		boolean isAccountRole = false;
-		boolean isManagerRole = false;
 
 		List<GrantedAuthority> grantedAuthorities = (List<GrantedAuthority>) authentication.getAuthorities();
 		for (GrantedAuthority grantedAuthority : grantedAuthorities) {
 			if (grantedAuthority.getAuthority().equals(ADMIN_ROLE)) {
 				isAdminRole = true;
-				break;
-			} else if (grantedAuthority.getAuthority().equals(MANAGER_ROLE)) {
-				isManagerRole = true;
-				break;
-
+				break;			
 			} else if (grantedAuthority.getAuthority().equals(USER_ROLE)) {
 				isAccountRole = true;
 				break;
@@ -43,9 +37,7 @@ public class AuthenticationSuccessHandlerCustom implements AuthenticationSuccess
 		}
 
 		if (isAdminRole) {
-			redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/admin");
-		} else if (isManagerRole) {
-			redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/manager");
+			redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/admin");		
 		} else if (isAccountRole) {
 			redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/user");
 

@@ -2,6 +2,10 @@ package com.example.demo.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Email;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,24 +16,35 @@ public class TransactionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+    
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     private List<OrderEntity> orderEntityList;
 
+    @NotBlank(message = "This field must not be empty")
     @Column(name = "transactionname")
     private String transactionname;
+    
+    @NotBlank(message = "This field must not be empty")
+    @Email(message = "Please enter a valid e-mail address")
     @Column(name = "transactionmail")
     private String transactionmail;
+    
+    @NotBlank(message = "This field must not be empty")
     @Column(name = "transactionaddress")
     private String transactionaddress;
+    
+    @NotBlank(message = "This field must not be empty")
+    @Size(min=10,max=10, message = "Please enter a 10-digit phone number")
     @Column(name = "transactionphone")
     private String transactionphone;
+    
     @Column(name = "payment")
     private double payment;
-    @Column(name = "security")
-    private String security;
+    
     @Column(name = "transactionstatus")
-    private boolean transactionstatus;
+    private String transactionstatus;
+    
     @Column(name = "transactiondate")
     private Date transactiondate;
 
@@ -92,19 +107,11 @@ public class TransactionEntity {
         this.payment = payment;
     }
 
-    public String getSecurity() {
-        return security;
-    }
-
-    public void setSecurity(String security) {
-        this.security = security;
-    }
-
-    public boolean isTransactionstatus() {
+    public String getTransactionstatus() {
         return transactionstatus;
     }
 
-    public void setTransactionstatus(boolean transactionstatus) {
+    public void setTransactionstatus(String transactionstatus) {
         this.transactionstatus = transactionstatus;
     }
 
