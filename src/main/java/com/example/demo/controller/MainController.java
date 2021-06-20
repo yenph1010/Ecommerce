@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -57,9 +59,6 @@ public class MainController {
 	private UserService userService;
 
 	@Autowired
-	private RoleService roleService;
-
-	@Autowired
 	private ProductService productService;
 
 	@Autowired
@@ -70,7 +69,7 @@ public class MainController {
 
 	@Autowired
 	ProductRepository productRepository;
-	
+
 	@Autowired
 	TransactionRepository transactionRepository;
 
@@ -79,13 +78,27 @@ public class MainController {
 
 	@Autowired
 	private OrderService orderService;
-     
+
 ////////////////////	Register, Login, Logout     ////////////////////
 	@RequestMapping({ "/", "" })
 	public String indexPage(Model model) {
-		model.addAttribute("productList", productService.getProductEntities());
 		List<CategoryEntity> categories = categoryService.CategoryEntityAll();
 		model.addAttribute("categories", categories);
+		return indexPage(model, 1);
+	}
+
+	@RequestMapping("/indexpage/{i}")
+	public String indexPage(Model model, @PathVariable(name = "i") int pageNum) {
+
+		Page<ProductEntity> page = productService.getProductEntities(pageNum);
+
+		List<ProductEntity> productList = page.getContent();
+
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("productList", productList);
+
 		return "index";
 	}
 
@@ -106,9 +119,23 @@ public class MainController {
 
 	@RequestMapping("/user")
 	public String showHomePage(Model model) {
-		model.addAttribute("productList", productService.getProductEntities());
 		List<CategoryEntity> categories = categoryService.CategoryEntityAll();
 		model.addAttribute("categories", categories);
+		return homePage(model, 1);
+	}
+
+	@RequestMapping("/homepage/{i}")
+	public String homePage(Model model, @PathVariable(name = "i") int pageNum) {
+
+		Page<ProductEntity> page = productService.getProductEntities(pageNum);
+
+		List<ProductEntity> productList = page.getContent();
+
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("productList", productList);
+
 		return "home";
 	}
 
@@ -135,7 +162,6 @@ public class MainController {
 		if (userService.isException(newUserEntity)) {
 			return "redirect:/register";
 		} else {
-			userService.saveAccount(newUserEntity);
 			userService.saveAccount(newUserEntity);
 			Boolean isValidEmail = validate(userEntity.getAccountEntity().getEmail());
 			if (isValidEmail) {
@@ -229,14 +255,19 @@ public class MainController {
 		UserEntity userEntity = userService.getEditUser(id);
 		model.addAttribute("user", userEntity);
 		model.addAttribute("type", "update");
-		model.addAttribute("action", "editUser");
+		model.addAttribute("action", "/editUser");
 		return "customer_edit";
 	}
 
-	@RequestMapping(value = "/editAccountUser/{id}", method = RequestMethod.POST)
-	public String editUser(@ModelAttribute UserEntity userEntity) {
-		userRepository.save(userEntity);
-		return "redirect:customers";
+	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
+	public String editUser(@ModelAttribute UserEntity user, HttpServletRequest request) {		
+		List<RoleEntity> roleEntityList = new ArrayList<>();
+		RoleEntity roleEntity = new RoleEntity();
+		roleEntity.setName(request.getParameter("role"));
+		roleEntityList.add(roleEntity);
+		user.setUserRoleEntities(roleEntityList);
+		userRepository.save(user);
+		return "redirect:/customer";
 	}
 
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
@@ -248,21 +279,35 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/newUser", method = RequestMethod.POST)
-	public String newUser(UserEntity userEntity, AccountEntity accountEntity, RoleEntity roleEntity, Model model) {
-		List<UserEntity> userEntities = new ArrayList<>();
-		userEntities.add(userEntity);
-		userEntities.add(accountEntity.getUserEntity());
-		///////////////////////////////////////////////////////
-		userEntity.setUsername(userEntity.getUsername());
-		userEntity.setPassword(new BCryptPasswordEncoder().encode(userEntity.getPassword()));
-		userEntity.setEnabled(1);
-		accountEntity.setEmail(userEntity.getAccountEntity().getEmail());
-		accountEntity.setPhonenumber(userEntity.getAccountEntity().getPhonenumber());
-		userEntity.setAccountEntity(accountEntity);
-		accountEntity.setUserEntity(userEntity);
-		userRepository.save(userEntity);
-		model.addAttribute("account", userEntities);
-		return "redirect:customers";
+	public String newUser(UserEntity userEntity, AccountEntity accountEntity, HttpServletRequest request,
+			Model model) {
+
+		UserEntity newUserEntity = new UserEntity();
+		newUserEntity.setUsername(userEntity.getUsername());
+
+		newUserEntity.setPassword(new BCryptPasswordEncoder().encode(userEntity.getPassword()));
+
+		List<RoleEntity> roleEntityList = new ArrayList<>();
+		RoleEntity roleEntity = new RoleEntity();
+		roleEntity.setName(request.getParameter("role"));
+		roleEntityList.add(roleEntity);
+		newUserEntity.setEnabled(1);
+		newUserEntity.setUserRoleEntities(roleEntityList);
+		if (userService.isException(newUserEntity)) {
+			return "redirect:/customer";
+		} else {
+			userService.saveAccount(newUserEntity);
+			Boolean isValidEmail = validate(userEntity.getAccountEntity().getEmail());
+			if (isValidEmail) {
+				AccountEntity accountEntity1 = new AccountEntity();
+				accountEntity1.setEmail(userEntity.getAccountEntity().getEmail());
+				accountEntity1.setPhonenumber(userEntity.getAccountEntity().getPhonenumber());
+				accountEntity1.setDate(new Timestamp(new Date().getTime()));
+				accountEntity1.setUserEntity(userService.getAccountByUsername(newUserEntity.getUsername()));
+				accountService.saveAccount(accountEntity1);
+			}
+			return "redirect:/customer";
+		}
 	}
 
 ////////////////////Product Management     ////////////////////
@@ -396,7 +441,21 @@ public class MainController {
 
 	@RequestMapping(value = "/guestViewAllProducts", method = RequestMethod.GET)
 	public String guestViewAllProducts(Model model) {
-		model.addAttribute("productList", productService.getProductEntities());
+		return guestViewPage(model, 1);
+	}
+
+	@RequestMapping("/guestpage/{i}")
+	public String guestViewPage(Model model, @PathVariable(name = "i") int pageNum) {
+
+		Page<ProductEntity> page = productService.getProductEntities(pageNum);
+
+		List<ProductEntity> productList = page.getContent();
+
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("productList", productList);
+
 		return "guest-product-grid";
 	}
 
@@ -432,9 +491,29 @@ public class MainController {
 		return "product-grid";
 	}
 
+//	@RequestMapping(value = "/viewAllProducts", method = RequestMethod.GET)
+//	public String viewAllProducts(Model model) {
+//		model.addAttribute("productList", productService.getProductEntities());
+//		return "product-grid";
+//	}
+
 	@RequestMapping(value = "/viewAllProducts", method = RequestMethod.GET)
 	public String viewAllProducts(Model model) {
-		model.addAttribute("productList", productService.getProductEntities());
+		return viewPage(model, 1);
+	}
+
+	@RequestMapping("/page/{i}")
+	public String viewPage(Model model, @PathVariable(name = "i") int pageNum) {
+
+		Page<ProductEntity> page = productService.getProductEntities(pageNum);
+
+		List<ProductEntity> productList = page.getContent();
+
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("productList", productList);
+
 		return "product-grid";
 	}
 

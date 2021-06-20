@@ -11,6 +11,10 @@ import com.example.demo.entity.ProductEntity;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
+	public Page<ProductEntity> findAll(Pageable pageable);
+	
+	public List<ProductEntity> findAll();
+	
 	public ProductEntity findById(int id);
 
 	public List<ProductEntity> findByCategoryEntityId(int id);

@@ -117,7 +117,7 @@
 								<c:forEach var="product" items="${productList}"
 									varStatus="index">
 									<!-- Start Single Category -->
-									<div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
+									<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
 										<div class="category">
 											<div class="ht__cat__thumb">
 												<a href="/viewProduct/${product.id}"> <img
@@ -156,6 +156,45 @@
 									</div>
 									<!-- End Single Category -->
 								</c:forEach>
+								<!-- Start Pagination -->
+					<div class="row">
+						<div class="col-xs-12">
+							<ul class="htc__pagenation">
+								<c:choose>
+									<c:when test="${currentPage > 1}">
+										<li><a href="/page/1">First</a></li>
+										<li><a href="/page/${currentPage - 1}">Pre</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="#">First</a></li>
+										<li><a href="#">Pre</a></li>
+									</c:otherwise>
+								</c:choose>
+								<c:forEach var="i" begin="1" end="${totalPages}"
+									varStatus="index">
+									<c:choose>
+										<c:when test="${currentPage != i}">
+											<li><a href="/page/${i}">${i}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="#">${i}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${currentPage < totalPages}">
+										<li><a href="/page/${currentPage + 1}}">Next</a></li>
+										<li><a href="/page/${totalPages}">Last</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="#">Next</a></li>
+										<li><a href="#">Last</a></li>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</div>
+					</div>
+					<!-- End Pagination -->
 							</c:if>
 							<c:if test="${productList.size()==0}">
 								<br>

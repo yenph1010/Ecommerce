@@ -83,7 +83,18 @@
 								</select>
 							</div>
 							<div class="ht__pro__qun">
-								<span>Showing 1-12 of 1033 products</span>
+
+								<c:choose>
+									<c:when test="${currentPage*8<totalItems}">
+										<span>Showing ${currentPage*8-7}-${currentPage*8} of
+											${totalItems} products</span>
+									</c:when>
+									<c:otherwise>
+										<span>Showing ${currentPage*8-7}-${totalItems} of
+											${totalItems} products</span>
+									</c:otherwise>
+								</c:choose>
+
 							</div>
 							<!-- Start List And Grid View -->
 							<ul class="view__mode" role="tablist">
@@ -217,11 +228,37 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<ul class="htc__pagenation">
-								<li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-								<li><a href="#">1</a></li>
-								<li class="active"><a href="#">3</a></li>
-								<li><a href="#">19</a></li>
-								<li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+								<c:choose>
+									<c:when test="${currentPage > 1}">
+										<li><a href="/page/1">First</a></li>
+										<li><a href="/page/${currentPage - 1}">Pre</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="#">First</a></li>
+										<li><a href="#">Pre</a></li>
+									</c:otherwise>
+								</c:choose>
+								<c:forEach var="i" begin="1" end="${totalPages}"
+									varStatus="index">
+									<c:choose>
+										<c:when test="${currentPage != i}">
+											<li><a href="/page/${i}">${i}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="#">${i}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${currentPage < totalPages}">
+										<li><a href="/page/${currentPage + 1}}">Next</a></li>
+										<li><a href="/page/${totalPages}">Last</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="#">Next</a></li>
+										<li><a href="#">Last</a></li>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 						</div>
 					</div>
@@ -264,31 +301,7 @@
 						</div>
 						<!-- End Category Area -->
 
-						<!-- Start Pro Color -->
-						<div class="ht__pro__color">
-							<h4 class="title__line--4">color</h4>
-							<ul class="ht__color__list">
-								<li class="grey"><a href="#">grey</a></li>
-								<li class="lamon"><a href="#">lamon</a></li>
-								<li class="white"><a href="#">white</a></li>
-								<li class="red"><a href="#">red</a></li>
-								<li class="black"><a href="#">black</a></li>
-								<li class="pink"><a href="#">pink</a></li>
-							</ul>
-						</div>
-						<!-- End Pro Color -->
-						<!-- Start Pro Size -->
-						<div class="ht__pro__size">
-							<h4 class="title__line--4">Size</h4>
-							<ul class="ht__size__list">
-								<li><a href="#">xs</a></li>
-								<li><a href="#">s</a></li>
-								<li><a href="#">m</a></li>
-								<li><a href="#">reld</a></li>
-								<li><a href="#">xl</a></li>
-							</ul>
-						</div>
-						<!-- End Pro Size -->
+
 						<!-- Start Tag Area -->
 						<div class="htc__tag">
 							<h4 class="title__line--4">tags</h4>
@@ -300,23 +313,7 @@
 							</ul>
 						</div>
 						<!-- End Tag Area -->
-						<!-- Start Compare Area -->
-						<div class="htc__compare__area">
-							<h4 class="title__line--4">compare</h4>
-							<ul class="htc__compare__list">
-								<li><a href="#">White menâs polo<i
-										class="icon-trash icons"></i></a></li>
-								<li><a href="#">T-shirt for style girl...<i
-										class="icon-trash icons"></i></a></li>
-								<li><a href="#">Basic dress for women...<i
-										class="icon-trash icons"></i></a></li>
-							</ul>
-							<ul class="ht__com__btn">
-								<li><a href="#">clear all</a></li>
-								<li class="compare"><a href="#">Compare</a></li>
-							</ul>
-						</div>
-						<!-- End Compare Area -->						
+
 					</div>
 				</div>
 			</div>

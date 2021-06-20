@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.example.demo.entity.CartEntity;
 import com.example.demo.entity.OrderEntity;
@@ -65,16 +67,23 @@ public class CartController {
 	AccountRepository accountRepository;
 
 	@Autowired
-    private JavaMailSender mailSender;
-	
+	private JavaMailSender mailSender;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showCart() {
 		return "cart";
 	}
 
+	@Bean(name = "myCartItems")
+	@SessionScope
+	public HashMap<Integer, CartEntity> createCart() {
+		return new HashMap<Integer, CartEntity>();
+	}
+
 	@RequestMapping(value = "addcart/{id}", method = RequestMethod.GET)
 	public String viewAdd(ModelMap mm, HttpSession session, @PathVariable("id") int id) {
-		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
+//		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
+		HashMap<Integer, CartEntity> cartItems = createCart();
 		if (cartItems == null) {
 			cartItems = new HashMap<>();
 		}
@@ -112,7 +121,8 @@ public class CartController {
 
 	@RequestMapping(value = "remove/{id}", method = RequestMethod.GET)
 	public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("id") Integer id) {
-		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
+//		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
+		HashMap<Integer, CartEntity> cartItems = createCart();
 		if (cartItems == null) {
 			cartItems = new HashMap<>();
 		}
@@ -131,7 +141,7 @@ public class CartController {
 		return "checkout";
 	}
 
-	@Transactional 
+	@Transactional(rollbackFor = Exception.class)
 	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
 	public String viewCheckout(HttpSession session,
 			@Valid @ModelAttribute("transactionEntity") TransactionEntity transactionEntity, BindingResult result)
@@ -140,7 +150,8 @@ public class CartController {
 		if (result.hasErrors()) {
 			return "checkout";
 		} else {
-			HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
+//			HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
+			HashMap<Integer, CartEntity> cartItems = createCart();
 			TransactionEntity transactionEntity1 = transactionService.newTransaction(transactionEntity);
 			transactionEntity1.setTransactiondate(new Timestamp(new Date().getTime()));
 			transactionEntity1.setTransactionstatus("Process");
@@ -151,41 +162,45 @@ public class CartController {
 				orderEntity.setTotal(entry.getValue().getProductEntity().getPrice());
 				orderEntity.setSale(entry.getValue().getProductEntity().getSale());
 				orderEntity.setQuantity(entry.getValue().getQuantity());
-				
-				//Update product quantity
+
+				// Update product quantity
 				int id = entry.getValue().getProductEntity().getId();
 				ProductEntity productEntity = productService.editProduct(id);
-				productEntity.setQuantity(entry.getValue().getProductEntity().getQuantity() - entry.getValue().getQuantity());
+				productEntity.setQuantity(
+						entry.getValue().getProductEntity().getQuantity() - entry.getValue().getQuantity());
 
 				orderService.newOrder(orderEntity);
+				sendEmail(transactionEntity1.getTransactionmail());
 			}
-			sendEmail(transactionEntity1.getTransactionmail());
+
 			session.removeAttribute("myCartNum");
 			session.removeAttribute("myCartItems");
 			return "shipping";
 		}
 	}
-	
+
 	public void sendEmail(String transactionmail) {
 		String from = "yen.19921010@gmail.com";
 		String to = transactionmail;
-		 
+
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
-		 
+
 		try {
 			helper.setSubject("You have successfully ordered products on our website.");
-		
-		helper.setFrom(from);
-		helper.setTo(to);
-		 
-		boolean html = true;
-		helper.setText("<b>Dear customer</b>,<br><i>We are processing your order to be shipped. Please wait 3~5 days until the order comes.</i>", html);
+
+			helper.setFrom(from);
+			helper.setTo(to);
+
+			boolean html = true;
+			helper.setText(
+					"<b>Dear customer</b>,<br><i>We are processing your order to be shipped. Please wait 3~5 days until the order comes.</i>",
+					html);
 		} catch (MessagingException e) {
-			
+
 			e.printStackTrace();
 		}
 		mailSender.send(message);
-    }
+	}
 
 }

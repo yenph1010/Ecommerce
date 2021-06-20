@@ -52,7 +52,7 @@
 								<i class="fas fa-tachometer-alt"></i>
 							</div> Dashboard
 						</a> 
-						<a class="nav-link active collapsed" href="#"
+						<a class="nav-link collapsed" href="#"
 							data-toggle="collapse" data-target="#collapseProducts"
 							aria-expanded="false" aria-controls="collapseProducts">
 							<div class="sb-nav-link-icon">

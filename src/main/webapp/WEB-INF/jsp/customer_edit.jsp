@@ -72,21 +72,21 @@
 										</div>
 										<div class="form-group">
 											<label class="form-label">Role*</label>
-											<c:choose>
+											<%-- <c:choose>
 												<c:when test="${type.equals('update')}">
 													<c:forEach var="role" items="${user.userRoleEntities}"
 														varStatus="index">
-														<form:input path="id" value="${role.name}" type="text"
+														<input value="${role.name}" name="role" type="text"
 															class="form-control"
-															placeholder="Enter Role: ADMIN or USER" />
+															placeholder="Enter Role: ADMIN or USER"></input>
 													</c:forEach>
 												</c:when>
-												<c:otherwise>
-													<form:input path="id" value=" " type="text"
+												<c:otherwise> --%>
+													<input name="role" type="text"
 														class="form-control"
-														placeholder="Enter Role: ADMIN or USER" />
-												</c:otherwise>
-											</c:choose>
+														placeholder="Enter Role: ADMIN or USER"></input>
+												<%-- </c:otherwise>
+											</c:choose> --%>
 										</div>
 									</div>
 									<button class="save-btn hover-btn" type="submit">Save</button>
