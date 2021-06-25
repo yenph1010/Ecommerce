@@ -103,7 +103,9 @@ public class MainController {
 	}
 
 	@RequestMapping("/admin")
-	public String adminPage() {
+	public String adminPage(Model model) {
+		model.addAttribute("orders", orderService.getOrderEntities());
+		model.addAttribute("transaction", transactionService.transactionEntities());
 		return "admin";
 	}
 
@@ -186,62 +188,6 @@ public class MainController {
 
 	}
 
-	public static String getMD5(String input) {
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] messageDigest = md.digest(input.getBytes());
-			return convertByteToHex(messageDigest);
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public String MD5() {
-		String md5 = new String();
-		try {
-			java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-			byte[] array = md.digest(md5.getBytes());
-			StringBuilder sb = new StringBuilder();
-			for (byte b : array) {
-				sb.append(Integer.toHexString((b & 0xFF) | 0x100).substring(1, 3));
-			}
-			return sb.toString();
-		} catch (java.security.NoSuchAlgorithmException ignored) {
-		}
-		return null;
-	}
-
-	public static String getSHAHash(String input) throws NoSuchAlgorithmException {
-
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-1");
-			byte[] messageDigest = md.digest(input.getBytes());
-			return convertByteToHex(messageDigest);
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static String convertByteToHex(byte[] data) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < data.length; i++) {
-			sb.append(Integer.toString((data[i] & 0xff) + 0x100, 16).substring(1));
-		}
-		return sb.toString();
-	}
-
-	public static String getON_MD5(String data) throws NoSuchAlgorithmException {
-		MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-
-		messageDigest.update(data.getBytes());
-		byte[] digest = messageDigest.digest();
-		StringBuffer sb = new StringBuffer();
-		for (byte b : digest) {
-			sb.append(Integer.toHexString((int) (b & 0xff)));
-		}
-		return sb.toString();
-	}
-
 ////////////////////   User Management     ////////////////////
 
 	@RequestMapping("/customer")
@@ -260,7 +206,8 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
-	public String editUser(@ModelAttribute UserEntity user, HttpServletRequest request) {		
+	public String editUser(@RequestParam("id") int id, HttpServletRequest request) {
+		UserEntity user = userService.getEditUser(id);
 		List<RoleEntity> roleEntityList = new ArrayList<>();
 		RoleEntity roleEntity = new RoleEntity();
 		roleEntity.setName(request.getParameter("role"));
@@ -313,10 +260,23 @@ public class MainController {
 ////////////////////Product Management     ////////////////////
 	@RequestMapping("/productsadmin")
 	public String getAllProductAdmin(Model model) {
-		model.addAttribute("productList", productService.getProductEntities());
+		return adminViewPage(model, 1);
+	}
+	
+	@RequestMapping("/adminpage/{i}")
+	public String adminViewPage(Model model, @PathVariable(name = "i") int pageNum) {
+
+		Page<ProductEntity> page = productService.getProductEntities(pageNum);
+
+		List<ProductEntity> productList = page.getContent();
+
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("productList", productList);
+
 		return "products";
 	}
-
 	@RequestMapping(value = "/productSearch", method = RequestMethod.GET)
 	public String search(@RequestParam("searchInput") String searchInput, Model model) {
 		List<ProductEntity> resultList;
@@ -491,11 +451,6 @@ public class MainController {
 		return "product-grid";
 	}
 
-//	@RequestMapping(value = "/viewAllProducts", method = RequestMethod.GET)
-//	public String viewAllProducts(Model model) {
-//		model.addAttribute("productList", productService.getProductEntities());
-//		return "product-grid";
-//	}
 
 	@RequestMapping(value = "/viewAllProducts", method = RequestMethod.GET)
 	public String viewAllProducts(Model model) {

@@ -46,8 +46,6 @@
 										<table class="table ucp-table table-hover">
 											<thead>
 												<tr>
-													<th style="width: 60px"><input type="checkbox"
-														class="check-all"></th>
 													<th style="width: 60px">ID</th>
 													<th>Name</th>
 													<th>Email</th>
@@ -59,8 +57,6 @@
 											<tbody>
 												<c:forEach var="user" items="${users}" varStatus="index">
 													<tr>
-														<td><input type="checkbox" class="check-item"
-															name="${user.id}" value="10"></td>
 														<td>${user.id}</td>
 														<td>${user.username}</td>
 														<td>${user.accountEntity.email}</td>
@@ -73,9 +69,8 @@
 															class="view-shop-btn" title="View"><i
 																class="fas fa-eye"></i></a> <a
 															href="editAccountUser/${user.id}" class="edit-btn"
-															title="Edit"><i class="fas fa-edit"></i></a> <a href="#"
-															class="delete-btn" title="Edit"><i
-																class="fas fa-trash-alt"></i></a></td>
+															title="Edit"><i class="fas fa-edit"></i></a>
+															<input type="hidden" name="id""/></td>
 													</tr>
 												</c:forEach>
 											</tbody>

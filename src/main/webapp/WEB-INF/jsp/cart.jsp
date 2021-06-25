@@ -131,22 +131,14 @@
 										<a href="/user">Continue Shopping</a>
 									</div>
 									<div class="buttons-cart checkout--btn">
-										<a href="#">update</a> <a href="/cart/checkoutforms">checkout</a>
+										<a href="/cart/updateCart">update</a> <a href="/cart/checkoutforms">checkout</a>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-sm-12 col-xs-12">
-								<div class="ht__coupon__code">
-									<span>enter your discount code</span>
-									<div class="coupon__box">
-										<input type="text" placeholder="">
-										<div class="ht__cp__btn">
-											<a href="#">enter</a>
-										</div>
-									</div>
-								</div>
+								
 							</div>
 							<div class="col-md-6 col-sm-12 col-xs-12 smt-40 xmt-40">
 								<div class="htc__cart__total">
@@ -168,7 +160,7 @@
 											+ (sessionScope.myCartTotal/10)}</span>
 									</div>
 									<ul class="payment__btn">
-										<li class="active"><a href="#">payment</a></li>
+										<li class="active"><a href="/cart/checkoutforms">payment</a></li>
 										<li><a href="/user">continue shopping</a></li>
 									</ul>
 								</div>

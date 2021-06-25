@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -68,22 +69,18 @@ public class CartController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	@Qualifier("myCartItems")
+	private HashMap<Integer, CartEntity> cartItems;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showCart() {
 		return "cart";
 	}
 
-	@Bean(name = "myCartItems")
-	@SessionScope
-	public HashMap<Integer, CartEntity> createCart() {
-		return new HashMap<Integer, CartEntity>();
-	}
-
 	@RequestMapping(value = "addcart/{id}", method = RequestMethod.GET)
-	public String viewAdd(ModelMap mm, HttpSession session, @PathVariable("id") int id) {
-//		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
-		HashMap<Integer, CartEntity> cartItems = createCart();
+	public String viewAdd(HttpSession session, @PathVariable("id") int id) {
 		if (cartItems == null) {
 			cartItems = new HashMap<>();
 		}
@@ -120,9 +117,7 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "remove/{id}", method = RequestMethod.GET)
-	public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("id") Integer id) {
-//		HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
-		HashMap<Integer, CartEntity> cartItems = createCart();
+	public String viewRemove(HttpSession session, @PathVariable("id") Integer id) {
 		if (cartItems == null) {
 			cartItems = new HashMap<>();
 		}
@@ -135,23 +130,32 @@ public class CartController {
 		return "cart";
 	}
 
+	@RequestMapping(value = "/updateCart", method = RequestMethod.GET)
+	public String updateCart(HttpSession session) {
+		if (cartItems == null) {
+			cartItems = new HashMap<>();
+		}
+		session.setAttribute("myCartItems", cartItems);
+		session.setAttribute("myCartTotal", totalPrice(cartItems));
+		session.setAttribute("myCartNum", cartItems.size());
+		return "cart";
+	}
+	
 	@RequestMapping(value = "/checkoutforms", method = RequestMethod.GET)
-	public String addProducts(Model model, HttpSession session, @ModelAttribute("Order") OrderEntity orderEntity) {
+	public String checkoutforms(Model model, HttpSession session, @ModelAttribute("Order") OrderEntity orderEntity) {
 		model.addAttribute("transactionEntity", new TransactionEntity());
 		return "checkout";
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
-	public String viewCheckout(HttpSession session,
+	public String checkout(HttpSession session,
 			@Valid @ModelAttribute("transactionEntity") TransactionEntity transactionEntity, BindingResult result)
 			throws NoSuchAlgorithmException {
 		// Validate result
 		if (result.hasErrors()) {
 			return "checkout";
 		} else {
-//			HashMap<Integer, CartEntity> cartItems = (HashMap<Integer, CartEntity>) session.getAttribute("myCartItems");
-			HashMap<Integer, CartEntity> cartItems = createCart();
 			TransactionEntity transactionEntity1 = transactionService.newTransaction(transactionEntity);
 			transactionEntity1.setTransactiondate(new Timestamp(new Date().getTime()));
 			transactionEntity1.setTransactionstatus("Process");

@@ -92,17 +92,7 @@
 					</div>
 					<div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
 						<div class="ht__product__dtl">
-							<h2>${product.name}</h2>
-							<h6>
-								Model: <span>MNG001</span>
-							</h6>
-							<ul class="rating">
-								<li><i class="icon-star icons"></i></li>
-								<li><i class="icon-star icons"></i></li>
-								<li><i class="icon-star icons"></i></li>
-								<li class="old"><i class="icon-star icons"></i></li>
-								<li class="old"><i class="icon-star icons"></i></li>
-							</ul>
+							<h2>${product.name}</h2>							
 							<ul class="pro__prize">
 								<c:choose>
 									<c:when test="${product.sale== 0}">
@@ -124,50 +114,29 @@
 								eros et accumsan</p>
 							<div class="ht__pro__desc">
 								<div class="sin__desc">
-									<p>
-										<span>Availability:</span> In Stock
-									</p>
+									<c:choose>
+										<c:when test="${product.quantity> 0}">
+											<p>
+												<span>Availability:</span> In Stock
+											</p>
+										</c:when>
+										<c:otherwise>
+											<p>
+												<span>Availability:</span> Out Of Stock
+											</p>
+										</c:otherwise>
+									</c:choose>
 								</div>
-								<div class="sin__desc align--left">
-									<p>
-										<span>color:</span>
-									</p>
-									<ul class="pro__color">
-										<li class="red"><a href="#">red</a></li>
-										<li class="green"><a href="#">green</a></li>
-										<li class="balck"><a href="#">balck</a></li>
-									</ul>
-									<div class="pro__more__btn">
-										<a href="#">more</a>
-									</div>
-								</div>
-								<div class="sin__desc align--left">
-									<p>
-										<span>size</span>
-									</p>
-									<select class="select__size">
-										<option>s</option>
-										<option>l</option>
-										<option>xs</option>
-										<option>xl</option>
-										<option>m</option>
-										<option>s</option>
-									</select>
-								</div>
+								
 								<div class="sin__desc align--left">
 									<p>
 										<span>Categories:</span>
 									</p>
 									<ul class="pro__cat__list">
-										<li><a href="#">Fashion,</a></li>
-										<li><a href="#">Accessories,</a></li>
-										<li><a href="#">Women,</a></li>
-										<li><a href="#">Men,</a></li>
-										<li><a href="#">Kid,</a></li>
-										<li><a href="#">Mobile,</a></li>
-										<li><a href="#">Computer,</a></li>
-										<li><a href="#">Hair,</a></li>
-										<li><a href="#">Clothing,</a></li>
+										<li><a href="/search/1">Table</a></li>
+										<li><a href="/search/2">Chair</a></li>
+										<li><a href="/search/3">Bed</a></li>
+										<li><a href="/search/4">Others</a></li>
 									</ul>
 								</div>
 								<div class="sin__desc align--left">
@@ -175,11 +144,10 @@
 										<span>Product tags:</span>
 									</p>
 									<ul class="pro__cat__list">
-										<li><a href="#">Fashion,</a></li>
-										<li><a href="#">Accessories,</a></li>
-										<li><a href="#">Women,</a></li>
-										<li><a href="#">Men,</a></li>
-										<li><a href="#">Kid,</a></li>
+										<li><a href="/search/1">Table</a></li>
+										<li><a href="/search/2">Chair</a></li>
+										<li><a href="/search/3">Bed</a></li>
+										<li><a href="/search/4">Others</a></li>
 									</ul>
 								</div>
 
@@ -225,11 +193,7 @@
 					<!-- Start List And Grid View -->
 					<ul class="pro__details__tab" role="tablist">
 						<li role="presentation" class="description active"><a
-							href="#description" role="tab" data-toggle="tab">description</a></li>
-						<li role="presentation" class="review"><a href="#review"
-							role="tab" data-toggle="tab">review</a></li>
-						<li role="presentation" class="shipping"><a href="#shipping"
-							role="tab" data-toggle="tab">shipping</a></li>
+							href="#description" role="tab" data-toggle="tab">description</a></li>						
 					</ul>
 					<!-- End List And Grid View -->
 				</div>
@@ -283,100 +247,7 @@
 							</div>
 						</div>
 						<!-- End Single Content -->
-						<!-- Start Single Content -->
-						<div role="tabpanel" id="review"
-							class="pro__single__content tab-pane fade">
-							<div class="pro__tab__content__inner">
-								<p>Formfitting clothing is all about a sweet spot. That
-									elusive place where an item is tight but not clingy, sexy but
-									not cloying, cool but not over the top. Alexandra Alvarezâs
-									label, Alix, hits that mark with its range of comfortable,
-									minimal, and neutral-hued bodysuits.</p>
-								<h4 class="ht__pro__title">Description</h4>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-									nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-									aliquip ex ea commodo consequat. Duis autem vel eum iriure
-									dolor in hendrerit in vulputate velit esse molestie consequat,
-									vel illum dolore eu feugiat nulla facilisis at vero eros et
-									accumsan et iusto odio dignissim qui blandit praesent luptatum
-									zzril delenit augue duis dolore te feugait nulla facilisi. Nam
-									liber tempor cum soluta nobis eleifend option congue nihil
-									imperdiet doming id quod mazim placerat facer possim assum.
-									Typi non habent claritatem insitam; est usus legentis in iis
-									qui facit eorum claritatem</p>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat. Duis autem vel eum iriure dolor in
-									hendrerit in vulputate velit esse molestie consequat, vel illum
-									dolore eu feugiat nulla facilisis at vero eros et accumsan et
-									iusto odio dignissim qui blandit praesent luptatum zzril
-									delenit augue duis dolore te feugait nulla facilisi.</p>
-								<h4 class="ht__pro__title">Standard Featured</h4>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-									nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-									aliquip ex ea commodo consequat. Duis autem vel eum iriure
-									dolor in hendrerit in vulputate velit esse molestie consequat,
-									vel illum dolore eu feugiat nulla facilisis at vero eros et
-									accumsan et iusto odio dignissim qui blandit praesent luptatum
-									zzril delenit augue duis dolore te feugait nulla facilisi. Nam
-									liber tempor cum soluta nobis eleifend option congue nihil
-									imperdiet doming id quod mazim placerat facer possim assum.
-									Typi non habent claritatem insitam; est usus legentis in iis
-									qui facit eorum claritatem</p>
-							</div>
-						</div>
-						<!-- End Single Content -->
-						<!-- Start Single Content -->
-						<div role="tabpanel" id="shipping"
-							class="pro__single__content tab-pane fade">
-							<div class="pro__tab__content__inner">
-								<p>Formfitting clothing is all about a sweet spot. That
-									elusive place where an item is tight but not clingy, sexy but
-									not cloying, cool but not over the top. Alexandra Alvarezâs
-									label, Alix, hits that mark with its range of comfortable,
-									minimal, and neutral-hued bodysuits.</p>
-								<h4 class="ht__pro__title">Description</h4>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-									nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-									aliquip ex ea commodo consequat. Duis autem vel eum iriure
-									dolor in hendrerit in vulputate velit esse molestie consequat,
-									vel illum dolore eu feugiat nulla facilisis at vero eros et
-									accumsan et iusto odio dignissim qui blandit praesent luptatum
-									zzril delenit augue duis dolore te feugait nulla facilisi. Nam
-									liber tempor cum soluta nobis eleifend option congue nihil
-									imperdiet doming id quod mazim placerat facer possim assum.
-									Typi non habent claritatem insitam; est usus legentis in iis
-									qui facit eorum claritatem</p>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat. Duis autem vel eum iriure dolor in
-									hendrerit in vulputate velit esse molestie consequat, vel illum
-									dolore eu feugiat nulla facilisis at vero eros et accumsan et
-									iusto odio dignissim qui blandit praesent luptatum zzril
-									delenit augue duis dolore te feugait nulla facilisi.</p>
-								<h4 class="ht__pro__title">Standard Featured</h4>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-									nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-									aliquip ex ea commodo consequat. Duis autem vel eum iriure
-									dolor in hendrerit in vulputate velit esse molestie consequat,
-									vel illum dolore eu feugiat nulla facilisis at vero eros et
-									accumsan et iusto odio dignissim qui blandit praesent luptatum
-									zzril delenit augue duis dolore te feugait nulla facilisi. Nam
-									liber tempor cum soluta nobis eleifend option congue nihil
-									imperdiet doming id quod mazim placerat facer possim assum.
-									Typi non habent claritatem insitam; est usus legentis in iis
-									qui facit eorum claritatem</p>
-							</div>
-						</div>
-						<!-- End Single Content -->
+						
 					</div>
 				</div>
 			</div>

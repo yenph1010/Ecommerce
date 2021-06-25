@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>All Product</title>
+<title>All Products</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -27,7 +27,7 @@
 <!-- Theme shortcodes/elements style -->
 <link rel="stylesheet" href="/css/shortcode/shortcodes.css">
 <!-- Theme main style -->
-<link rel="stylesheet" href="/cssstyle.css">
+<link rel="stylesheet" href="/css/style.css">
 <!-- Responsive css -->
 <link rel="stylesheet" href="/css/responsive.css">
 <!-- User style -->
@@ -83,12 +83,15 @@
 							</div>
 							<div class="ht__pro__qun">
 								<c:choose>
-									<c:when test="${currentPage*8<totalItems}">
-										<span>Showing ${currentPage*8-7}-${currentPage*8} of
+								<c:when test="${currentPage-1<0}">
+										<span>Showing results</span>
+									</c:when>
+									<c:when test="${currentPage*9<totalItems}">
+										<span>Showing ${currentPage*9-8}-${currentPage*9} of
 											${totalItems} products</span>
 									</c:when>
 									<c:otherwise>
-										<span>Showing ${currentPage*8-7}-${totalItems} of
+										<span>Showing ${currentPage*9-8}-${totalItems} of
 											${totalItems} products</span>
 									</c:otherwise>
 								</c:choose>
@@ -226,28 +229,48 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<ul class="htc__pagenation">
-								<c:choose>
-									<c:when test="${currentPage > 1}">
-										<li><a href="/guestpage/1">First</a></li>
-										<li><a href="/guestpage/${currentPage - 1}">Pre</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href="#">First</a></li>
-										<li><a href="#">Pre</a></li>
-									</c:otherwise>
-								</c:choose>
-								<c:forEach var="i" begin="1" end="${totalPages}"
-									varStatus="index">
+								<c:if test="${currentPage-1>=0}">
+									<span></span>
 									<c:choose>
-										<c:when test="${currentPage != i}">
-											<li><a href="/guestpage/${i}">${i}</a></li>
+										<c:when test="${currentPage > 1}">
+											<li><a href="/guestpage/1">First</a></li>
+											<li><a href="/guestpage/${currentPage - 1}">Pre</a></li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="#">${i}</a></li>
+											<li><a href="#">First</a></li>
+											<li><a href="#">Pre</a></li>
 										</c:otherwise>
 									</c:choose>
-								</c:forEach>
-								<c:choose>
+									<c:choose>
+										<c:when test="${currentPage + 1 > totalPages}">
+											<c:forEach var="i" begin="${currentPage}"
+												end="${currentPage + 1}" varStatus="index">
+												<c:choose>
+													<c:when test="${currentPage != i}">
+														<li><a href="/guestpage/${i}">${i}</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="#">${i}</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</c:when>
+
+										<c:otherwise>
+											<c:forEach var="i" begin="${currentPage}"
+												end="${totalPages}" varStatus="index">
+												<c:choose>
+													<c:when test="${currentPage != i}">
+														<li><a href="/guestpage/${i}">${i}</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="#">${i}</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
 									<c:when test="${currentPage < totalPages}">
 										<li><a href="/guestpage/${currentPage + 1}}">Next</a></li>
 										<li><a href="/guestpage/${totalPages}">Last</a></li>
@@ -256,7 +279,8 @@
 										<li><a href="#">Next</a></li>
 										<li><a href="#">Last</a></li>
 									</c:otherwise>
-								</c:choose>
+									</c:choose>
+								</c:if>
 							</ul>
 						</div>
 					</div>
@@ -265,28 +289,7 @@
 				<div
 					class="col-lg-3 col-lg-pull-9 col-md-3 col-md-pull-9 col-sm-12 col-xs-12 smt-40 xmt-40">
 					<div class="htc__product__leftsidebar">
-						<!-- Start Prize Range -->
-						<div class="htc-grid-range">
-							<h4 class="title__line--4">Price</h4>
-							<div class="content-shopby">
-								<div class="price_filter s-filter clear">
-									<form action="#" method="GET">
-										<div id="slider-range"></div>
-										<div class="slider__range--output">
-											<div class="price__output--wrap">
-												<div class="price--output">
-													<span>Price :</span><input type="text" id="amount" readonly>
-												</div>
-												<div class="price--filter">
-													<a href="#">Filter</a>
-												</div>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-						<!-- End Prize Range -->
+						
 						<!-- Start Category Area -->
 						<div class="htc__category">
 							<h4 class="title__line--4">categories</h4>

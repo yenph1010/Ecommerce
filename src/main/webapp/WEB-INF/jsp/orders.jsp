@@ -59,8 +59,6 @@
 									<table class="table ucp-table table-hover">
 										<thead>
 											<tr>
-												<th style="width: 60px"><input type="checkbox"
-													class="check-all"></th>
 												<th style="width: 130px">ID</th>												
 												<th style="width: 200px">Name</th>
 												<th style="width: 200px">Email</th>												
@@ -75,8 +73,6 @@
 											<c:if test="${not empty transaction}">
 												<c:forEach var="s" items="${transaction}">
 													<tr>
-														<td><input type="checkbox" class="check-item"
-															name="ids[]" value="${s.id}"></td>
 														<td>${s.id}</td>
 														<td>${s.transactionname}</td>
 														<td>${s.transactionmail}</td>

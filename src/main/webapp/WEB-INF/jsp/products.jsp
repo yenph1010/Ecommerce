@@ -14,7 +14,7 @@
 <title>Admin Page</title>
 <link href="/css/styles.css" rel="stylesheet">
 <link href="/css/admin-style.css" rel="stylesheet">
-
+<!-- Theme main style -->
 <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 </head>
@@ -30,22 +30,9 @@
 					<li class="breadcrumb-item active">Products</li>
 				</ol>
 				<div class="row justify-content-between">
-					<div class="col-lg-12">
-						<a href="/addProduct" class="add-btn hover-btn">Add New</a>
-					</div>
 					<div class="col-lg-3 col-md-4">
 						<div class="bulk-section mt-30">
-							<div class="input-group">
-								<select id="action" name="action" class="form-control">
-									<option selected>Bulk Actions</option>
-									<option value="1">Active</option>
-									<option value="2">Inactive</option>
-									<option value="3">Delete</option>
-								</select>
-								<div class="input-group-append">
-									<button class="status-btn hover-btn" type="submit">Apply</button>
-								</div>
-							</div>
+							<a href="/addProduct" class="add-btn hover-btn">Add New</a>
 						</div>
 					</div>
 					<div class="col-lg-5 col-md-6">
@@ -78,17 +65,33 @@
 							<div class="card-body-table">
 								<div class="table-responsive">
 									<c:if test="${not empty productList}">
+										<div style="text-align: right">
+
+											<c:choose>
+												<c:when test="${currentPage-1<0}">
+													<span>Showing results</span>
+												</c:when>
+												<c:when test="${currentPage*9<totalItems}">
+													<span>Showing ${currentPage*9-8}-${currentPage*9} of
+														${totalItems} products</span>
+												</c:when>
+												<c:otherwise>
+													<span>Showing ${currentPage*9-8}-${totalItems} of
+														${totalItems} products</span>
+												</c:otherwise>
+											</c:choose>
+
+										</div>
 										<table class="table ucp-table table-hover">
 											<thead>
 												<tr>
-													<th style="width: 60px"><input type="checkbox"
-														class="check-all"></th>
 													<th style="width: 60px">ID</th>
 													<th style="width: 100px">Image</th>
 													<th>Name</th>
 													<th>Category</th>
 													<th>Description</th>
 													<th>Quantity</th>
+													<th>Price</th>
 													<th>Sale</th>
 													<th>Action</th>
 												</tr>
@@ -97,8 +100,7 @@
 												<c:forEach var="product" items="${productList}"
 													varStatus="index">
 													<tr>
-														<td><input type="checkbox" class="check-item"
-															name="id" value="product.id"></td>
+
 														<td>${product.id}</td>
 														<td>
 															<div class="cate-img-5">
@@ -109,6 +111,7 @@
 														<td>${product.categoryEntity.category}</td>
 														<td>${product.description}</td>
 														<td>${product.quantity}</td>
+														<td>${product.price}</td>
 														<td>${product.sale}</td>
 														<td class="action-btns"><a
 															href="/editProduct/${product.id}" class="edit-btn"
@@ -119,6 +122,66 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										<!-- Start Pagination -->
+										<div class="row" style="text-align: center">
+											<div class="col-xs-12">
+												<ul class="pagination">
+													<c:if test="${currentPage-1>=0}">
+														<span></span>
+														<c:choose>
+															<c:when test="${currentPage > 1}">
+																<li><a href="/adminpage/1">First</a></li>
+																<li><a href="/adminpage/${currentPage - 1}">Pre</a></li>
+															</c:when>
+															<c:otherwise>
+																<li><a href="#">First</a></li>
+																<li><a href="#">Pre</a></li>
+															</c:otherwise>
+														</c:choose>
+														<c:choose>
+															<c:when test="${currentPage + 1 > totalPages}">
+																<c:forEach var="i" begin="${currentPage}"
+																	end="${currentPage + 1}" varStatus="index">
+																	<c:choose>
+																		<c:when test="${currentPage != i}">
+																			<li><a href="/adminpage/${i}">${i}</a></li>
+																		</c:when>
+																		<c:otherwise>
+																			<li><a href="#">${i}</a></li>
+																		</c:otherwise>
+																	</c:choose>
+																</c:forEach>
+															</c:when>
+
+															<c:otherwise>
+																<c:forEach var="i" begin="${currentPage}"
+																	end="${totalPages}" varStatus="index">
+																	<c:choose>
+																		<c:when test="${currentPage != i}">
+																			<li><a href="/adminpage/${i}">${i}</a></li>
+																		</c:when>
+																		<c:otherwise>
+																			<li><a href="#">${i}</a></li>
+																		</c:otherwise>
+																	</c:choose>
+																</c:forEach>
+															</c:otherwise>
+														</c:choose>
+														<c:choose>
+															<c:when test="${currentPage < totalPages}">
+																<li><a href="/adminpage/${currentPage + 1}}">Next</a></li>
+																<li><a href="/adminpage/${totalPages}">Last</a></li>
+															</c:when>
+															<c:otherwise>
+																<li><a href="#">Next</a></li>
+																<li><a href="#">Last</a></li>
+															</c:otherwise>
+														</c:choose>
+													</c:if>
+												</ul>
+											</div>
+										</div>
+										<!-- End Pagination -->
 									</c:if>
 									<c:if test="${productList.size()==0}">
 										<br>
@@ -133,7 +196,7 @@
 		</main>
 		<jsp:include page="footer-admin.jsp"></jsp:include>
 	</div>
-	</div>
+
 	<script src="/js/jquery-3.4.1.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/scripts.js"></script>

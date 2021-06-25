@@ -72,30 +72,7 @@
 					</div>
 				</div>
 				<!-- End Single Slide -->
-				<!-- Start Single Slide -->
-				<div class="single__slide animation__style01 slider__fixed--height">
-					<div class="container">
-						<div class="row align-items__center">
-							<div class="col-md-7 col-sm-7 col-xs-12 col-lg-6">
-								<div class="slide">
-									<div class="slider__inner">
-										<h2>collection 2021</h2>
-										<h1>NICE CHAIR</h1>
-										<div class="cr__btn">
-											<a href="/viewAllProducts">Shop Now</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-5 col-xs-12 col-md-5">
-								<div class="slide__thumb">
-									<img src="images/slider/fornt-img/2.png" alt="slider images">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- End Single Slide -->
+				
 			</div>
 		</div>
 		<!-- Start Slider Area -->
@@ -160,37 +137,58 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<ul class="htc__pagenation">
-								<c:choose>
-									<c:when test="${currentPage > 1}">
-										<li><a href="/page/1">First</a></li>
-										<li><a href="/page/${currentPage - 1}">Pre</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href="#">First</a></li>
-										<li><a href="#">Pre</a></li>
-									</c:otherwise>
-								</c:choose>
-								<c:forEach var="i" begin="1" end="${totalPages}"
-									varStatus="index">
+								<c:if test="${currentPage-1>=0}">
+									<span></span>
 									<c:choose>
-										<c:when test="${currentPage != i}">
-											<li><a href="/page/${i}">${i}</a></li>
+										<c:when test="${currentPage > 1}">
+											<li><a href="/homepage/1">First</a></li>
+											<li><a href="/homepage/${currentPage - 1}">Pre</a></li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="#">${i}</a></li>
+											<li><a href="#">First</a></li>
+											<li><a href="#">Pre</a></li>
 										</c:otherwise>
 									</c:choose>
-								</c:forEach>
-								<c:choose>
+									<c:choose>
+										<c:when test="${currentPage + 1 > totalPages}">
+											<c:forEach var="i" begin="${currentPage}"
+												end="${currentPage + 1}" varStatus="index">
+												<c:choose>
+													<c:when test="${currentPage != i}">
+														<li><a href="/homepage/${i}">${i}</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="#">${i}</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</c:when>
+
+										<c:otherwise>
+											<c:forEach var="i" begin="${currentPage}"
+												end="${totalPages}" varStatus="index">
+												<c:choose>
+													<c:when test="${currentPage != i}">
+														<li><a href="/homepage/${i}">${i}</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="#">${i}</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
 									<c:when test="${currentPage < totalPages}">
-										<li><a href="/page/${currentPage + 1}}">Next</a></li>
-										<li><a href="/page/${totalPages}">Last</a></li>
+										<li><a href="/homepage/${currentPage + 1}}">Next</a></li>
+										<li><a href="/homepage/${totalPages}">Last</a></li>
 									</c:when>
 									<c:otherwise>
 										<li><a href="#">Next</a></li>
 										<li><a href="#">Last</a></li>
 									</c:otherwise>
-								</c:choose>
+									</c:choose>
+								</c:if>
 							</ul>
 						</div>
 					</div>
