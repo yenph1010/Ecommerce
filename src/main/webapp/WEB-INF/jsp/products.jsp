@@ -43,7 +43,7 @@
 										placeholder="Search">
 								</form:form>
 							</div>
-							<div class="input-group">
+							<!-- <div class="input-group">
 								<select id="category" name="category" class="form-control">
 									<option value="1">Table</option>
 									<option value="2">Chair</option>
@@ -54,7 +54,7 @@
 									<button class="status-btn hover-btn" type="submit">Search
 										Category</button>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="col-lg-12 col-md-12">
@@ -123,8 +123,9 @@
 											</tbody>
 										</table>
 										<!-- Start Pagination -->
-										<div class="row" style="text-align: center">
-											<div class="col-xs-12">
+										<div class="row">
+											<div class="col-lg-4 col-md-4 col-xs-12"></div>
+											<div class="col-lg-4 col-md-4 col-xs-12">
 												<ul class="pagination">
 													<c:if test="${currentPage-1>=0}">
 														<span></span>
@@ -139,9 +140,9 @@
 															</c:otherwise>
 														</c:choose>
 														<c:choose>
-															<c:when test="${currentPage + 1 > totalPages}">
+															<c:when test="${currentPage> totalPages}">
 																<c:forEach var="i" begin="${currentPage}"
-																	end="${currentPage + 1}" varStatus="index">
+																	end="${currentPage}" varStatus="index">
 																	<c:choose>
 																		<c:when test="${currentPage != i}">
 																			<li><a href="/adminpage/${i}">${i}</a></li>
@@ -179,6 +180,7 @@
 														</c:choose>
 													</c:if>
 												</ul>
+
 											</div>
 										</div>
 										<!-- End Pagination -->

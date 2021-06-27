@@ -101,7 +101,7 @@
 										</div>
 										<div class="order-total-dt">
 											<div class="order-total-left-text">Tax</div>
-											<div class="order-total-right-text">$${transactionEntity.payment - transactionEntity.payment*10/11}</div>
+											<div class="order-total-right-text">$${transactionEntity.payment/11}</div>
 										</div>
 										<div class="order-total-dt">
 											<div class="order-total-left-text fsz-18">Total Amount

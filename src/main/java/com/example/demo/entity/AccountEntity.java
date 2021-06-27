@@ -2,6 +2,9 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.Email;
+
 import java.util.Date;
 
 @Entity

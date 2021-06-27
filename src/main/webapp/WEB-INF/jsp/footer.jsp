@@ -88,10 +88,10 @@
                                 <div class="ft__inner">
                                     <ul class="ft__list">
                                         <li><a href="#">My Account</a></li>
-                                        <li><a href="cart.html">My Cart</a></li>
-                                        <li><a href="login">Login</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="/login">My Cart</a></li>
+                                        <li><a href="/login">Login</a></li>
+                                        <li><a href="#">Wishlist</a></li>
+                                        <li><a href="#">Checkout</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -104,10 +104,10 @@
                                 <div class="ft__inner">
                                     <ul class="ft__list">
                                         <li><a href="#">My Account</a></li>
-                                        <li><a href="cart.html">My Cart</a></li>
-                                        <li><a href="login">Login</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="/login">My Cart</a></li>
+                                        <li><a href="/login">Login</a></li>
+                                        <li><a href="#">Wishlist</a></li>
+                                        <li><a href="#">Checkout</a></li>
                                     </ul>
                                 </div>
                             </div>

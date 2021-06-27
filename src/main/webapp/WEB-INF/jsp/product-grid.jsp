@@ -244,7 +244,7 @@
 										</c:otherwise>
 									</c:choose>
 									<c:choose>
-										<c:when test="${currentPage + 1 > totalPages}">
+										<c:when test="${currentPage > totalPages}">
 											<c:forEach var="i" begin="${currentPage}"
 												end="${currentPage + 1}" varStatus="index">
 												<c:choose>

@@ -42,8 +42,8 @@
 
 	<div class="container">
 		<div class="checkout-method__login">
-			<div class="col-md-7 col-sm-7 col-xs-12 col-lg-4"></div>
-			<div class="col-lg-4 col-sm-5 col-xs-12 col-md-5">
+			<div class="col-md-4 col-sm-4 col-xs-12 col-lg-4"></div>
+			<div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
 				<div style="text-align: center">
 					<br>
 					<h5 class="checkout-method__title">Register</h5>

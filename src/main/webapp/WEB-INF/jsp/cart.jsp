@@ -131,7 +131,8 @@
 										<a href="/user">Continue Shopping</a>
 									</div>
 									<div class="buttons-cart checkout--btn">
-										<a href="/cart/updateCart">update</a> <a href="/cart/checkoutforms">checkout</a>
+										<!-- <a href="/cart/updateCart">update</a>  -->
+										<a href="/cart/checkoutforms">checkout</a>
 									</div>
 								</div>
 							</div>

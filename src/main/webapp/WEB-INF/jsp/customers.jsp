@@ -65,9 +65,7 @@
 																items="${user.userRoleEntities}" varStatus="index">
 																<p>${role.name}</p>
 															</c:forEach></td>
-														<td class="action-btns"><a href="customer_view"
-															class="view-shop-btn" title="View"><i
-																class="fas fa-eye"></i></a> <a
+														<td class="action-btns"><a
 															href="editAccountUser/${user.id}" class="edit-btn"
 															title="Edit"><i class="fas fa-edit"></i></a>
 															<input type="hidden" name="id""/></td>

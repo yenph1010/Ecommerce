@@ -120,7 +120,7 @@
 											</div>
 										</div>
 
-										<div class="accordion__title">payment information</div>
+										<!-- <div class="accordion__title">payment information</div>
 										<div class="accordion__body">
 											<div class="paymentinfo">
 												<div class="single-method">
@@ -133,7 +133,7 @@
 												</div>
 												
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>

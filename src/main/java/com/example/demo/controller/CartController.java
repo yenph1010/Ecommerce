@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -14,22 +13,16 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.annotation.SessionScope;
 
 import com.example.demo.entity.CartEntity;
 import com.example.demo.entity.OrderEntity;
@@ -38,13 +31,9 @@ import com.example.demo.entity.TransactionEntity;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.service.AccountService;
-import com.example.demo.service.CategoryService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.ProductService;
-import com.example.demo.service.RoleService;
 import com.example.demo.service.TransactionService;
-import com.example.demo.service.UserService;
 
 @Controller
 @RequestMapping(value = "/cart")

@@ -81,10 +81,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			
 		</main>
 		<jsp:include page="footer-admin.jsp"></jsp:include>
-	</div>
+		</div>
+		
 
 	<script src="/js/jquery-3.4.1.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
