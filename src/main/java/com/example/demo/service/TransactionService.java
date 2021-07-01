@@ -11,5 +11,4 @@ public interface TransactionService {
 
 	public TransactionEntity findbyTransaction(int id);
 
-	public TransactionEntity findByPayment(double payment);
 }

@@ -1,12 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.OrderEntity;
+import com.example.demo.entity.OrderDetailEntity;
 
 import java.util.List;
 
 public interface OrderService {
-    public void newOrder(OrderEntity orderEntity);
-    public List<OrderEntity> getOrderEntities();
-    public List<OrderEntity> getIDTransaction(int id);
-    public OrderEntity findbyViewdetails(int id);
+    public void newOrder(OrderDetailEntity orderEntity);
+    public List<OrderDetailEntity> getOrderEntities();
+    public List<OrderDetailEntity> getIDTransaction(int id);
+    public OrderDetailEntity findbyViewdetails(int id);
 }

@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 
-import com.example.demo.entity.OrderEntity;
+import com.example.demo.entity.OrderDetailEntity;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +17,25 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public void newOrder(OrderEntity orderEntity) {
+    public void newOrder(OrderDetailEntity orderEntity) {
         orderRepository.save(orderEntity);
     }
 
 
     @Override
-    public OrderEntity findbyViewdetails(int id) {
-        OrderEntity orderEntity = orderRepository.findById(id);
+    public OrderDetailEntity findbyViewdetails(int id) {
+        OrderDetailEntity orderEntity = orderRepository.findById(id);
         return orderEntity;
     }
 
 
     @Override
-    public List<OrderEntity> getIDTransaction(int id) {
-        return (List<OrderEntity>) orderRepository.findByTransactionEntityId(id);
+    public List<OrderDetailEntity> getIDTransaction(int id) {
+        return (List<OrderDetailEntity>) orderRepository.findByTransactionEntityId(id);
     }
     @Override
-    public List<OrderEntity> getOrderEntities(){
-        return (List<OrderEntity>)orderRepository.findAll();
+    public List<OrderDetailEntity> getOrderEntities(){
+        return (List<OrderDetailEntity>)orderRepository.findAll();
     }
 }
 

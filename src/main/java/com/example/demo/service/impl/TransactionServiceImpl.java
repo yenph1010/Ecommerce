@@ -26,12 +26,6 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionEntity findByPayment(double payment) {
-        TransactionEntity transactionEntity = transactionRepository.findByPayment(payment);
-        return transactionEntity;
-    }
-
-    @Override
     public List<TransactionEntity> transactionEntities(){
         return (List<TransactionEntity>)transactionRepository.findAll();
     }

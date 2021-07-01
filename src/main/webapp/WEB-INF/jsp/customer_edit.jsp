@@ -55,7 +55,7 @@
 											<div class="form-group">
 												<label class="form-label">Password*</label>
 												<form:input path="password" type="text" class="form-control"
-													id="id" placeholder="Enter Password" required="required" />
+													placeholder="Enter Password" required="required" />
 											</div>
 										</c:if>
 										<div class="form-group">
@@ -85,6 +85,7 @@
 													<input name="role" type="text"
 														class="form-control"
 														placeholder="Enter Role: ADMIN or USER"></input>
+														<form:hidden path="id" value="${user.id}"/>
 												<%-- </c:otherwise>
 											</c:choose> --%>
 										</div>

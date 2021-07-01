@@ -19,7 +19,7 @@ public class TransactionEntity {
     
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
-    private List<OrderEntity> orderEntityList;
+    private List<OrderDetailEntity> orderEntityList;
 
     @NotBlank(message = "This field must not be empty")
     @Column(name = "transactionname")
@@ -59,11 +59,11 @@ public class TransactionEntity {
         this.id = id;
     }
 
-    public List<OrderEntity> getOrderEntityList() {
+    public List<OrderDetailEntity> getOrderEntityList() {
         return orderEntityList;
     }
 
-    public void setOrderEntityList(List<OrderEntity> orderEntityList) {
+    public void setOrderEntityList(List<OrderDetailEntity> orderEntityList) {
         this.orderEntityList = orderEntityList;
     }
 

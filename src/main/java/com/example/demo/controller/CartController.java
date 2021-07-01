@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.entity.CartEntity;
-import com.example.demo.entity.OrderEntity;
+import com.example.demo.entity.OrderDetailEntity;
 import com.example.demo.entity.ProductEntity;
 import com.example.demo.entity.TransactionEntity;
 import com.example.demo.repository.AccountRepository;
@@ -131,7 +131,7 @@ public class CartController {
 	}
 	
 	@RequestMapping(value = "/checkoutforms", method = RequestMethod.GET)
-	public String checkoutforms(Model model, HttpSession session, @ModelAttribute("Order") OrderEntity orderEntity) {
+	public String checkoutforms(Model model, HttpSession session, @ModelAttribute("Order") OrderDetailEntity orderEntity) {
 		model.addAttribute("transactionEntity", new TransactionEntity());
 		return "checkout";
 	}
@@ -149,7 +149,7 @@ public class CartController {
 			transactionEntity1.setTransactiondate(new Timestamp(new Date().getTime()));
 			transactionEntity1.setTransactionstatus("Process");
 			for (Map.Entry<Integer, CartEntity> entry : cartItems.entrySet()) {
-				OrderEntity orderEntity = new OrderEntity();
+				OrderDetailEntity orderEntity = new OrderDetailEntity();
 				orderEntity.setTransactionEntity(transactionEntity1);
 				orderEntity.setProductEntity(entry.getValue().getProductEntity());
 				orderEntity.setTotal(entry.getValue().getProductEntity().getPrice());

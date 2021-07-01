@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionEntity, Integer> {
     public TransactionEntity findById(int id);
-    TransactionEntity findByPayment(double payment);
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-public class OrderEntity {
+public class OrderDetailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -24,7 +24,7 @@ public class OrderEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;
 
-    public OrderEntity() {
+    public OrderDetailEntity() {
     }
 
     public int getId() {
